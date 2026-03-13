@@ -1,0 +1,10 @@
+{
+  "model_type": "4-Class Multiclass CNN",
+  "evaluation_date": "2026-03-06T12:09:14.772143",
+  "test_accuracy": 0.9957325746799431,
+  "clinical_grade": "CLINICAL_GRADE",
+  "deployment_ready": true,
+  "data_leakage_fixed": true,
+  "evaluation_seed": 123,
+  "training_seed": 42
+}

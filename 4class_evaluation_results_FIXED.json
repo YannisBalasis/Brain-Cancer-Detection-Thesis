@@ -1,0 +1,175 @@
+{
+  "evaluation_info": {
+    "timestamp": "2026-03-06T12:09:14.772143",
+    "model_path": "./multiclass_4class_experiment_20251217_141321/best_multiclass_4class_model.h5",
+    "test_samples": 703,
+    "evaluation_seed": 123,
+    "training_seed_used": 42
+  },
+  "basic_metrics": {
+    "accuracy": 0.9957325746799431,
+    "top_2_accuracy": 0.9985775248933144,
+    "top_3_accuracy": 1.0,
+    "precision_macro": 0.9955357142857143,
+    "recall_macro": 0.995493125701459,
+    "f1_macro": 0.9954827020044411
+  },
+  "confusion_matrix": [
+    [
+      160,
+      2,
+      0,
+      0
+    ],
+    [
+      0,
+      165,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      200,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      175
+    ]
+  ],
+  "classification_report": {
+    "Glioma": {
+      "precision": 1.0,
+      "recall": 0.9876543209876543,
+      "f1-score": 0.9937888198757764,
+      "support": 162.0
+    },
+    "Meningioma": {
+      "precision": 0.9821428571428571,
+      "recall": 1.0,
+      "f1-score": 0.990990990990991,
+      "support": 165.0
+    },
+    "No Tumor": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 200.0
+    },
+    "Pituitary": {
+      "precision": 1.0,
+      "recall": 0.9943181818181818,
+      "f1-score": 0.9971509971509972,
+      "support": 176.0
+    },
+    "accuracy": 0.9957325746799431,
+    "macro avg": {
+      "precision": 0.9955357142857143,
+      "recall": 0.995493125701459,
+      "f1-score": 0.9954827020044411,
+      "support": 703.0
+    },
+    "weighted avg": {
+      "precision": 0.9958087787035156,
+      "recall": 0.9957325746799431,
+      "f1-score": 0.9957409357495942,
+      "support": 703.0
+    }
+  },
+  "per_class_analysis": {
+    "Glioma": {
+      "total_samples": 162,
+      "correct_predictions": 160,
+      "accuracy": 0.9876543209876543,
+      "precision": 1.0,
+      "recall": 0.9876543209876543,
+      "f1_score": 0.9937888198757764,
+      "mean_confidence": 0.9910774230957031,
+      "true_positives": 160,
+      "false_negatives": 2,
+      "false_positives": 0
+    },
+    "Meningioma": {
+      "total_samples": 165,
+      "correct_predictions": 165,
+      "accuracy": 1.0,
+      "precision": 0.9821428571428571,
+      "recall": 1.0,
+      "f1_score": 0.9909909909909909,
+      "mean_confidence": 0.9816955327987671,
+      "true_positives": 165,
+      "false_negatives": 0,
+      "false_positives": 3
+    },
+    "No Tumor": {
+      "total_samples": 200,
+      "correct_predictions": 200,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "mean_confidence": 0.9927482604980469,
+      "true_positives": 200,
+      "false_negatives": 0,
+      "false_positives": 0
+    },
+    "Pituitary": {
+      "total_samples": 176,
+      "correct_predictions": 175,
+      "accuracy": 0.9943181818181818,
+      "precision": 1.0,
+      "recall": 0.9943181818181818,
+      "f1_score": 0.9971509971509972,
+      "mean_confidence": 0.9963914155960083,
+      "true_positives": 175,
+      "false_negatives": 1,
+      "false_positives": 0
+    }
+  },
+  "medical_metrics": {
+    "binary_tumor_detection": {
+      "accuracy": 1.0,
+      "sensitivity": 1.0,
+      "specificity": 1.0,
+      "true_positives": 503,
+      "true_negatives": 200,
+      "false_positives": 0,
+      "false_negatives": 0
+    }
+  },
+  "confidence_analysis": {
+    "mean_confidence": 0.988741397857666,
+    "std_confidence": 0.05135556310415268,
+    "breakdown": {
+      "very_high": {
+        "accuracy": 1.0,
+        "count": 669,
+        "percentage": 95.16358463726885
+      },
+      "high": {
+        "accuracy": 1.0,
+        "count": 19,
+        "percentage": 2.7027027027027026
+      },
+      "medium": {
+        "accuracy": 1.0,
+        "count": 8,
+        "percentage": 1.1379800853485065
+      },
+      "low": {
+        "accuracy": 0.5714285714285714,
+        "count": 7,
+        "percentage": 0.995732574679943
+      }
+    }
+  },
+  "clinical_assessment": {
+    "grade": "CLINICAL_GRADE",
+    "deployment_ready": true,
+    "recommendation": "Suitable for clinical deployment \u03bc\u03b5 appropriate oversight",
+    "accuracy": 0.9957325746799431
+  }
+}

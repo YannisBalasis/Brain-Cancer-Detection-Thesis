@@ -1,0 +1,272 @@
+{
+  "model_info": {
+    "model_path": "multi_dual_system_experiment_20260310_100816/best_multi_dual_model.h5",
+    "data_path": "/users/yannisbalasis/documents/thesis/data_multiclass",
+    "config": {
+      "experiment_name": "multi_dual_system_experiment_20260310_100816",
+      "backbone_type": "efficient",
+      "fusion_strategy": "weighted_ensemble",
+      "seed": 789,
+      "image_size": [
+        224,
+        224
+      ],
+      "batch_size": 32,
+      "epochs": 50,
+      "validation_split": 0.2,
+      "test_split": 0.1,
+      "class_names_3": [
+        "glioma",
+        "meningioma",
+        "pituitary"
+      ],
+      "class_names_4": [
+        "glioma",
+        "meningioma",
+        "no_tumor",
+        "pituitary"
+      ],
+      "class_weights_3": {
+        "0": 1.032892804698972,
+        "1": 1.017650462962963,
+        "2": 0.9531165311653117
+      },
+      "class_weights_4": {
+        "0": 1.0830396475770925,
+        "1": 1.0670572916666667,
+        "2": 0.8780357142857143,
+        "3": 0.999390243902439
+      },
+      "class_distribution": {
+        "0": 1135,
+        "1": 1152,
+        "2": 1400,
+        "3": 1230
+      },
+      "model_summary": "Multi-Dual System Architecture Summary\n==================================================\nBackbone Type: efficient\nFusion Strategy: weighted_ensemble\nInput Shape: (224, 224, 3)\nDropout Rate: 0.3\nRandom Seed: 789\n\nOutputs:\n  - Branch 1 (3-class): ['Glioma', 'Meningioma', 'Pituitary']\n  - Branch 2 (4-class): ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']\n  - Fusion Output: Primary classification\n\nTotal Parameters: 1,676,075\nTrainable Parameters: 1,671,339\n"
+    }
+  },
+  "dataset_info": {
+    "total_test_samples": 701,
+    "test_samples_3class": 501
+  },
+  "metrics": {
+    "branch1_3class": {
+      "accuracy": 0.9660678642714571,
+      "top2_accuracy": 0.998003992015968,
+      "classification_report": {
+        "glioma": {
+          "precision": 0.9875776397515528,
+          "recall": 0.9814814814814815,
+          "f1-score": 0.9845201238390093,
+          "support": 162.0
+        },
+        "meningioma": {
+          "precision": 0.9741935483870968,
+          "recall": 0.9207317073170732,
+          "f1-score": 0.9467084639498433,
+          "support": 164.0
+        },
+        "pituitary": {
+          "precision": 0.9405405405405406,
+          "recall": 0.9942857142857143,
+          "f1-score": 0.9666666666666667,
+          "support": 175.0
+        },
+        "accuracy": 0.9660678642714571,
+        "macro avg": {
+          "precision": 0.9674372428930634,
+          "recall": 0.9654996343614229,
+          "f1-score": 0.9659650848185065,
+          "support": 501.0
+        },
+        "weighted avg": {
+          "precision": 0.9667662957481639,
+          "recall": 0.9660678642714571,
+          "f1-score": 0.9659064167991226,
+          "support": 501.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          159,
+          3,
+          0
+        ],
+        [
+          2,
+          151,
+          11
+        ],
+        [
+          0,
+          1,
+          174
+        ]
+      ],
+      "per_class_accuracy": [
+        0.9814814814814815,
+        0.9207317073170732,
+        0.9942857142857143
+      ]
+    },
+    "branch2_4class": {
+      "accuracy": 0.9372325249643366,
+      "top2_accuracy": 0.9914407988587732,
+      "classification_report": {
+        "glioma": {
+          "precision": 0.9875776397515528,
+          "recall": 0.9814814814814815,
+          "f1-score": 0.9845201238390093,
+          "support": 162.0
+        },
+        "meningioma": {
+          "precision": 0.9629629629629629,
+          "recall": 0.7926829268292683,
+          "f1-score": 0.8695652173913043,
+          "support": 164.0
+        },
+        "no_tumor": {
+          "precision": 0.8858447488584474,
+          "recall": 0.97,
+          "f1-score": 0.9260143198090692,
+          "support": 200.0
+        },
+        "pituitary": {
+          "precision": 0.9354838709677419,
+          "recall": 0.9942857142857143,
+          "f1-score": 0.96398891966759,
+          "support": 175.0
+        },
+        "accuracy": 0.9372325249643366,
+        "macro avg": {
+          "precision": 0.9429673056351763,
+          "recall": 0.9346125306491161,
+          "f1-score": 0.9360221451767433,
+          "support": 701.0
+        },
+        "weighted avg": {
+          "precision": 0.9397890595673635,
+          "recall": 0.9372325249643366,
+          "f1-score": 0.9358086742050434,
+          "support": 701.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          159,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          130,
+          25,
+          9
+        ],
+        [
+          2,
+          1,
+          194,
+          3
+        ],
+        [
+          0,
+          1,
+          0,
+          174
+        ]
+      ],
+      "per_class_accuracy": [
+        0.9814814814814815,
+        0.7926829268292683,
+        0.97,
+        0.9942857142857143
+      ]
+    },
+    "fusion": {
+      "accuracy": 0.9443651925820257,
+      "top2_accuracy": 0.9871611982881597,
+      "classification_report": {
+        "glioma": {
+          "precision": 0.9875776397515528,
+          "recall": 0.9814814814814815,
+          "f1-score": 0.9845201238390093,
+          "support": 162.0
+        },
+        "meningioma": {
+          "precision": 0.9642857142857143,
+          "recall": 0.823170731707317,
+          "f1-score": 0.8881578947368421,
+          "support": 164.0
+        },
+        "no_tumor": {
+          "precision": 0.9023255813953488,
+          "recall": 0.97,
+          "f1-score": 0.9349397590361446,
+          "support": 200.0
+        },
+        "pituitary": {
+          "precision": 0.9405405405405406,
+          "recall": 0.9942857142857143,
+          "f1-score": 0.9666666666666667,
+          "support": 175.0
+        },
+        "accuracy": 0.9443651925820257,
+        "macro avg": {
+          "precision": 0.9486823689932891,
+          "recall": 0.9422344818686282,
+          "f1-score": 0.9435711110696657,
+          "support": 701.0
+        },
+        "weighted avg": {
+          "precision": 0.946062975258592,
+          "recall": 0.9443651925820257,
+          "f1-score": 0.9433734283490116,
+          "support": 701.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          159,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          135,
+          21,
+          8
+        ],
+        [
+          2,
+          1,
+          194,
+          3
+        ],
+        [
+          0,
+          1,
+          0,
+          174
+        ]
+      ],
+      "per_class_accuracy": [
+        0.9814814814814815,
+        0.823170731707317,
+        0.97,
+        0.9942857142857143
+      ]
+    },
+    "binary_detection": {
+      "branch2_accuracy": 0.9557774607703281,
+      "branch2_sensitivity": 0.9500998003802376,
+      "branch2_specificity": 0.9699999999515,
+      "fusion_accuracy": 0.9614835948644793,
+      "fusion_sensitivity": 0.9580838323162059,
+      "fusion_specificity": 0.9699999999515
+    }
+  }
+}

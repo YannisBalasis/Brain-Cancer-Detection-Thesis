@@ -1,0 +1,14 @@
+# Large model/data files
+*.npy
+*.npz
+*.pth
+*.h5
+__pycache__/
+*.pyc
+
+# Experiment folders (μεγάλα δεδομένα)
+binary_ensemble_*/
+multiclass_*/
+dual_system_experiment_*/
+efnet_dual_system_experiment_*/
+improved_dual_experiment_*/

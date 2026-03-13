@@ -1,0 +1,43 @@
+{
+  "experiment_name": "multi_dual_system_experiment_20260310_100816",
+  "backbone_type": "efficient",
+  "fusion_strategy": "weighted_ensemble",
+  "seed": 789,
+  "image_size": [
+    224,
+    224
+  ],
+  "batch_size": 32,
+  "epochs": 50,
+  "validation_split": 0.2,
+  "test_split": 0.1,
+  "class_names_3": [
+    "glioma",
+    "meningioma",
+    "pituitary"
+  ],
+  "class_names_4": [
+    "glioma",
+    "meningioma",
+    "no_tumor",
+    "pituitary"
+  ],
+  "class_weights_3": {
+    "0": 1.032892804698972,
+    "1": 1.017650462962963,
+    "2": 0.9531165311653117
+  },
+  "class_weights_4": {
+    "0": 1.0830396475770925,
+    "1": 1.0670572916666667,
+    "2": 0.8780357142857143,
+    "3": 0.999390243902439
+  },
+  "class_distribution": {
+    "0": 1135,
+    "1": 1152,
+    "2": 1400,
+    "3": 1230
+  },
+  "model_summary": "Multi-Dual System Architecture Summary\n==================================================\nBackbone Type: efficient\nFusion Strategy: weighted_ensemble\nInput Shape: (224, 224, 3)\nDropout Rate: 0.3\nRandom Seed: 789\n\nOutputs:\n  - Branch 1 (3-class): ['Glioma', 'Meningioma', 'Pituitary']\n  - Branch 2 (4-class): ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']\n  - Fusion Output: Primary classification\n\nTotal Parameters: 1,676,075\nTrainable Parameters: 1,671,339\n"
+}

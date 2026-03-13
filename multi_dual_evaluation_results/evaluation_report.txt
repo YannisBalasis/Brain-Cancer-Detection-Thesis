@@ -1,0 +1,71 @@
+================================================================================
+MULTI-DUAL SYSTEM EVALUATION REPORT
+================================================================================
+
+MODEL INFORMATION
+--------------------------------------------------
+Model Path: multi_dual_system_experiment_20260310_100816/best_multi_dual_model.h5
+Data Path: /users/yannisbalasis/documents/thesis/data_multiclass
+Backbone Type: efficient
+Fusion Strategy: weighted_ensemble
+Seed: 789
+
+DATASET INFORMATION
+--------------------------------------------------
+Total Test Samples: 701
+3-Class Tumor Samples: 501
+
+4-Class Distribution:
+  Glioma: 162 (23.1%)
+  Meningioma: 164 (23.4%)
+  No_Tumor: 200 (28.5%)
+  Pituitary: 175 (25.0%)
+
+PERFORMANCE RESULTS
+--------------------------------------------------
+Branch 1 (3-Class Tumor Classification):
+  Overall Accuracy: 0.9661 (96.61%)
+  Top-2 Accuracy:   0.9980 (99.80%)
+  Per-Class:
+    Glioma: Acc=0.981, P=0.988, R=0.981, F1=0.985
+    Meningioma: Acc=0.921, P=0.974, R=0.921, F1=0.947
+    Pituitary: Acc=0.994, P=0.941, R=0.994, F1=0.967
+
+Branch 2 (4-Class Full Classification):
+  Overall Accuracy: 0.9372 (93.72%)
+  Top-2 Accuracy:   0.9914 (99.14%)
+  Per-Class:
+    Glioma: Acc=0.981, P=0.988, R=0.981, F1=0.985
+    Meningioma: Acc=0.793, P=0.963, R=0.793, F1=0.870
+    No_Tumor: Acc=0.970, P=0.886, R=0.970, F1=0.926
+    Pituitary: Acc=0.994, P=0.935, R=0.994, F1=0.964
+
+Fusion Output (Primary Classification):
+  Overall Accuracy: 0.9444 (94.44%)
+  Top-2 Accuracy:   0.9872 (98.72%)
+  Per-Class:
+    Glioma: Acc=0.981, P=0.988, R=0.981, F1=0.985
+    Meningioma: Acc=0.823, P=0.964, R=0.823, F1=0.888
+    No_Tumor: Acc=0.970, P=0.902, R=0.970, F1=0.935
+    Pituitary: Acc=0.994, P=0.941, R=0.994, F1=0.967
+
+Binary Tumor Detection:
+  Branch 2 - Accuracy: 0.9558, Sensitivity: 0.9501, Specificity: 0.9700
+  Fusion    - Accuracy: 0.9615, Sensitivity: 0.9581, Specificity: 0.9700
+
+CLINICAL ASSESSMENT
+--------------------------------------------------
+Grade: GOOD - Research Grade Performance
+Most Challenging Class: Meningioma (82.3%)
+
+COMPARISON WITH EXISTING MODELS
+--------------------------------------------------
+  1. Binary CNN:            99.57%
+  2. 4-Class CNN:           98.01%
+  3. EfficientNet-B3 Dual:  91.27%
+  4. ResNet-50 Dual:        85.45%
+  5. Multi-Dual System:     94.44%  <-- CURRENT
+
+Result: Outperformed all previous dual systems.
+
+================================================================================
