@@ -1,0 +1,259 @@
+{
+  "friedman": {
+    "statistic": 367.6252129471914,
+    "p_value": 2.5330584296204486e-76,
+    "significant": true,
+    "model_names": [
+      "Binary CNN",
+      "4-Class CNN",
+      "3-Class CNN",
+      "1-vs-1 Ensemble",
+      "ResNet-50 Dual",
+      "EfficientNet Dual",
+      "Multi-Dual System"
+    ]
+  },
+  "wilcoxon_bonferroni": [
+    {
+      "model_1": "Binary CNN",
+      "model_2": "4-Class CNN",
+      "accuracy_1": 0.9860279441117764,
+      "accuracy_2": 0.9800399201596807,
+      "better_model": "Binary CNN",
+      "statistic": 48.0,
+      "p_raw": 0.4385780260809998,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "3-Class CNN",
+      "accuracy_1": 0.9860279441117764,
+      "accuracy_2": 0.9780439121756487,
+      "better_model": "Binary CNN",
+      "statistic": 66.5,
+      "p_raw": 0.3457785861511603,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "1-vs-1 Ensemble",
+      "accuracy_1": 0.9860279441117764,
+      "accuracy_2": 0.9760479041916168,
+      "better_model": "Binary CNN",
+      "statistic": 70.0,
+      "p_raw": 0.25134910881022265,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.9860279441117764,
+      "accuracy_2": 0.7684630738522954,
+      "better_model": "Binary CNN",
+      "statistic": 0.0,
+      "p_raw": 1.62285864946458e-25,
+      "p_bonferroni": 3.408003163875618e-24,
+      "significant": "True"
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.9860279441117764,
+      "accuracy_2": 0.8602794411177644,
+      "better_model": "Binary CNN",
+      "statistic": 33.0,
+      "p_raw": 5.531835451788178e-15,
+      "p_bonferroni": 1.1616854448755174e-13,
+      "significant": "True"
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9860279441117764,
+      "accuracy_2": 0.9341317365269461,
+      "better_model": "Binary CNN",
+      "statistic": 31.0,
+      "p_raw": 2.0652857961262033e-06,
+      "p_bonferroni": 4.337100171865027e-05,
+      "significant": "True"
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "3-Class CNN",
+      "accuracy_1": 0.9800399201596807,
+      "accuracy_2": 0.9780439121756487,
+      "better_model": "4-Class CNN",
+      "statistic": 72.0,
+      "p_raw": 0.8083651559145103,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "1-vs-1 Ensemble",
+      "accuracy_1": 0.9800399201596807,
+      "accuracy_2": 0.9760479041916168,
+      "better_model": "4-Class CNN",
+      "statistic": 94.5,
+      "p_raw": 0.6547208460185769,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.9800399201596807,
+      "accuracy_2": 0.7684630738522954,
+      "better_model": "4-Class CNN",
+      "statistic": 169.5,
+      "p_raw": 1.2956737967756562e-23,
+      "p_bonferroni": 2.720914973228878e-22,
+      "significant": "True"
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.9800399201596807,
+      "accuracy_2": 0.8602794411177644,
+      "better_model": "4-Class CNN",
+      "statistic": 100.5,
+      "p_raw": 1.518935711951779e-13,
+      "p_bonferroni": 3.189764995098736e-12,
+      "significant": "True"
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9800399201596807,
+      "accuracy_2": 0.9341317365269461,
+      "better_model": "4-Class CNN",
+      "statistic": 64.0,
+      "p_raw": 3.61311254997983e-05,
+      "p_bonferroni": 0.0007587536354957643,
+      "significant": "True"
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "1-vs-1 Ensemble",
+      "accuracy_1": 0.9780439121756487,
+      "accuracy_2": 0.9760479041916168,
+      "better_model": "3-Class CNN",
+      "statistic": 90.0,
+      "p_raw": 0.8185458083820434,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.9780439121756487,
+      "accuracy_2": 0.7684630738522954,
+      "better_model": "3-Class CNN",
+      "statistic": 290.0,
+      "p_raw": 1.22707332411796e-22,
+      "p_bonferroni": 2.5768539806477157e-21,
+      "significant": "True"
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.9780439121756487,
+      "accuracy_2": 0.8602794411177644,
+      "better_model": "3-Class CNN",
+      "statistic": 175.0,
+      "p_raw": 1.2228494929219224e-12,
+      "p_bonferroni": 2.567983935136037e-11,
+      "significant": "True"
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9780439121756487,
+      "accuracy_2": 0.9341317365269461,
+      "better_model": "3-Class CNN",
+      "statistic": 184.5,
+      "p_raw": 0.0005042182294490066,
+      "p_bonferroni": 0.01058858281842914,
+      "significant": "True"
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.9760479041916168,
+      "accuracy_2": 0.7684630738522954,
+      "better_model": "1-vs-1 Ensemble",
+      "statistic": 287.5,
+      "p_raw": 2.0257031304529787e-22,
+      "p_bonferroni": 4.253976573951255e-21,
+      "significant": "True"
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.9760479041916168,
+      "accuracy_2": 0.8602794411177644,
+      "better_model": "1-vs-1 Ensemble",
+      "statistic": 134.0,
+      "p_raw": 9.38029791899997e-13,
+      "p_bonferroni": 1.9698625629899935e-11,
+      "significant": "True"
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9760479041916168,
+      "accuracy_2": 0.9341317365269461,
+      "better_model": "1-vs-1 Ensemble",
+      "statistic": 102.0,
+      "p_raw": 0.00025655038305572936,
+      "p_bonferroni": 0.0053875580441703165,
+      "significant": "True"
+    },
+    {
+      "model_1": "ResNet-50 Dual",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.7684630738522954,
+      "accuracy_2": 0.8602794411177644,
+      "better_model": "EfficientNet Dual",
+      "statistic": 474.5,
+      "p_raw": 5.92161851042551e-08,
+      "p_bonferroni": 1.2435398871893572e-06,
+      "significant": "True"
+    },
+    {
+      "model_1": "ResNet-50 Dual",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.7684630738522954,
+      "accuracy_2": 0.9341317365269461,
+      "better_model": "Multi-Dual System",
+      "statistic": 288.0,
+      "p_raw": 1.657008952544457e-17,
+      "p_bonferroni": 3.4797188003433593e-16,
+      "significant": "True"
+    },
+    {
+      "model_1": "EfficientNet Dual",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.8602794411177644,
+      "accuracy_2": 0.9341317365269461,
+      "better_model": "Multi-Dual System",
+      "statistic": 150.0,
+      "p_raw": 1.2521519946041268e-07,
+      "p_bonferroni": 2.629519188668666e-06,
+      "significant": "True"
+    }
+  ],
+  "average_ranks": {
+    "Binary CNN": 3.7904191616766467,
+    "4-Class CNN": 3.811377245508982,
+    "3-Class CNN": 3.8183632734530937,
+    "1-vs-1 Ensemble": 3.8253493013972055,
+    "ResNet-50 Dual": 4.55189620758483,
+    "EfficientNet Dual": 4.230538922155689,
+    "Multi-Dual System": 3.972055888223553
+  },
+  "critical_difference": 0.4025077973730543
+}

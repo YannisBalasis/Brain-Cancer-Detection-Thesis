@@ -1,0 +1,116 @@
+================================================================================
+STATISTICAL SIGNIFICANCE ANALYSIS REPORT
+Brain Tumor Classification - Model Comparison
+================================================================================
+Date: 2026-03-19 11:42:30
+Samples in common evaluation subset: 501
+Models compared: 7
+Significance level (alpha): 0.05
+
+MODEL ACCURACIES
+--------------------------------------------------
+  Binary CNN                          Accuracy=0.9860 (98.60%)  Avg Rank=3.790
+  4-Class CNN                         Accuracy=0.9800 (98.00%)  Avg Rank=3.811
+  3-Class CNN                         Accuracy=0.9780 (97.80%)  Avg Rank=3.818
+  1-vs-1 Ensemble                     Accuracy=0.9760 (97.60%)  Avg Rank=3.825
+  Multi-Dual System                   Accuracy=0.9341 (93.41%)  Avg Rank=3.972
+  EfficientNet Dual                   Accuracy=0.8603 (86.03%)  Avg Rank=4.231
+  ResNet-50 Dual                      Accuracy=0.7685 (76.85%)  Avg Rank=4.552
+
+1. FRIEDMAN TEST
+--------------------------------------------------
+  Chi-squared statistic: 367.6252
+  p-value:               0.000000
+  Significant:           YES
+  Interpretation: Significant differences exist among models.
+  Proceeding to post-hoc tests.
+
+2. CRITICAL DIFFERENCE
+--------------------------------------------------
+  CD (alpha=0.05): 0.4025
+  Models with |rank_i - rank_j| < CD are NOT significantly different.
+
+3. WILCOXON SIGNED-RANK TEST WITH BONFERRONI CORRECTION
+--------------------------------------------------
+  Number of comparisons: 21
+  Bonferroni-adjusted alpha: 0.002381
+
+  Model 1                        Model 2                            p_raw    p_Bonf   Sig               Better
+  --------------------------------------------------------------------------------------------------------------
+  Binary CNN                     ResNet-50 Dual                    0.0000    0.0000   YES           Binary CNN
+  4-Class CNN                    ResNet-50 Dual                    0.0000    0.0000   YES          4-Class CNN
+  3-Class CNN                    ResNet-50 Dual                    0.0000    0.0000   YES          3-Class CNN
+  1-vs-1 Ensemble                ResNet-50 Dual                    0.0000    0.0000   YES      1-vs-1 Ensemble
+  ResNet-50 Dual                 Multi-Dual System                 0.0000    0.0000   YES    Multi-Dual System
+  Binary CNN                     EfficientNet Dual                 0.0000    0.0000   YES           Binary CNN
+  4-Class CNN                    EfficientNet Dual                 0.0000    0.0000   YES          4-Class CNN
+  1-vs-1 Ensemble                EfficientNet Dual                 0.0000    0.0000   YES      1-vs-1 Ensemble
+  3-Class CNN                    EfficientNet Dual                 0.0000    0.0000   YES          3-Class CNN
+  ResNet-50 Dual                 EfficientNet Dual                 0.0000    0.0000   YES    EfficientNet Dual
+  EfficientNet Dual              Multi-Dual System                 0.0000    0.0000   YES    Multi-Dual System
+  Binary CNN                     Multi-Dual System                 0.0000    0.0000   YES           Binary CNN
+  4-Class CNN                    Multi-Dual System                 0.0000    0.0008   YES          4-Class CNN
+  1-vs-1 Ensemble                Multi-Dual System                 0.0003    0.0054   YES      1-vs-1 Ensemble
+  3-Class CNN                    Multi-Dual System                 0.0005    0.0106   YES          3-Class CNN
+  Binary CNN                     4-Class CNN                       0.4386    1.0000    NO           Binary CNN
+  Binary CNN                     3-Class CNN                       0.3458    1.0000    NO           Binary CNN
+  Binary CNN                     1-vs-1 Ensemble                   0.2513    1.0000    NO           Binary CNN
+  4-Class CNN                    3-Class CNN                       0.8084    1.0000    NO          4-Class CNN
+  4-Class CNN                    1-vs-1 Ensemble                   0.6547    1.0000    NO          4-Class CNN
+  3-Class CNN                    1-vs-1 Ensemble                   0.8185    1.0000    NO          3-Class CNN
+
+SUMMARY
+--------------------------------------------------
+  Significant pairwise differences: 15 / 21
+  Significantly different pairs:
+    Binary CNN vs ResNet-50 Dual (p_bonf=0.0000, better: Binary CNN)
+    Binary CNN vs EfficientNet Dual (p_bonf=0.0000, better: Binary CNN)
+    Binary CNN vs Multi-Dual System (p_bonf=0.0000, better: Binary CNN)
+    4-Class CNN vs ResNet-50 Dual (p_bonf=0.0000, better: 4-Class CNN)
+    4-Class CNN vs EfficientNet Dual (p_bonf=0.0000, better: 4-Class CNN)
+    4-Class CNN vs Multi-Dual System (p_bonf=0.0008, better: 4-Class CNN)
+    3-Class CNN vs ResNet-50 Dual (p_bonf=0.0000, better: 3-Class CNN)
+    3-Class CNN vs EfficientNet Dual (p_bonf=0.0000, better: 3-Class CNN)
+    3-Class CNN vs Multi-Dual System (p_bonf=0.0106, better: 3-Class CNN)
+    1-vs-1 Ensemble vs ResNet-50 Dual (p_bonf=0.0000, better: 1-vs-1 Ensemble)
+    1-vs-1 Ensemble vs EfficientNet Dual (p_bonf=0.0000, better: 1-vs-1 Ensemble)
+    1-vs-1 Ensemble vs Multi-Dual System (p_bonf=0.0054, better: 1-vs-1 Ensemble)
+    ResNet-50 Dual vs EfficientNet Dual (p_bonf=0.0000, better: EfficientNet Dual)
+    ResNet-50 Dual vs Multi-Dual System (p_bonf=0.0000, better: Multi-Dual System)
+    EfficientNet Dual vs Multi-Dual System (p_bonf=0.0000, better: Multi-Dual System)
+
+4. COHENS d EFFECT SIZE
+--------------------------------------------------
+  Interpretation: d<0.2=Negligible | 0.2-0.5=Small | 0.5-0.8=Medium | >0.8=Large
+
+  Model 1                        Model 2                               d       Effect               Better
+  ---------------------------------------------------------------------------------------------------------
+  Binary CNN                     ResNet-50 Dual                   0.7020       Medium           Binary CNN
+  4-Class CNN                    ResNet-50 Dual                   0.6726       Medium          4-Class CNN
+  3-Class CNN                    ResNet-50 Dual                   0.6631       Medium          3-Class CNN
+  1-vs-1 Ensemble                ResNet-50 Dual                   0.6537       Medium      1-vs-1 Ensemble
+  Binary CNN                     EfficientNet Dual                0.4854        Small           Binary CNN
+  ResNet-50 Dual                 Multi-Dual System                0.4783        Small    Multi-Dual System
+  4-Class CNN                    EfficientNet Dual                0.4526        Small          4-Class CNN
+  3-Class CNN                    EfficientNet Dual                0.4420        Small          3-Class CNN
+  1-vs-1 Ensemble                EfficientNet Dual                0.4316        Small      1-vs-1 Ensemble
+  Binary CNN                     Multi-Dual System                0.2672        Small           Binary CNN
+  EfficientNet Dual              Multi-Dual System                0.2448        Small    Multi-Dual System
+  ResNet-50 Dual                 EfficientNet Dual                0.2376        Small    EfficientNet Dual
+  4-Class CNN                    Multi-Dual System                0.2278        Small          4-Class CNN
+  3-Class CNN                    Multi-Dual System                0.2153        Small          3-Class CNN
+  1-vs-1 Ensemble                Multi-Dual System                0.2032        Small      1-vs-1 Ensemble
+  Binary CNN                     1-vs-1 Ensemble                  0.0731   Negligible           Binary CNN
+  Binary CNN                     3-Class CNN                      0.0601   Negligible           Binary CNN
+  Binary CNN                     4-Class CNN                      0.0463   Negligible           Binary CNN
+  4-Class CNN                    1-vs-1 Ensemble                  0.0272   Negligible          4-Class CNN
+  4-Class CNN                    3-Class CNN                      0.0139   Negligible          4-Class CNN
+  3-Class CNN                    1-vs-1 Ensemble                  0.0133   Negligible          3-Class CNN
+
+  Effect Size Distribution:
+    Negligible (d<0.2):   6 pairs
+    Small (0.2-0.5):      11 pairs
+    Medium (0.5-0.8):     4 pairs
+    Large (>0.8):         0 pairs
+
+================================================================================
