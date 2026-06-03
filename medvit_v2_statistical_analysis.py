@@ -45,8 +45,10 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+import pandas as pd
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from sklearn.model_selection import train_test_split
 from scipy.stats import wilcoxon, friedmanchisquare, rankdata
 
 warnings.filterwarnings('ignore')
@@ -117,18 +119,36 @@ def _get_medvit_dual_custom_objects():
 # DATA LOADING
 # ══════════════════════════════════════════════════════════════════════
 
+def _make_file_splits(data_path: str, seed: int = 42):
+    """Stratified 70 / 20 / 10 split. Returns (df_train, df_val, df_test)."""
+    rows = []
+    for cls in CLASS_NAMES_4:
+        for ext in ('*.jpg', '*.jpeg', '*.png', '*.JPG', '*.JPEG', '*.PNG'):
+            for fp in Path(data_path).joinpath(cls).glob(ext):
+                rows.append({'filename': str(fp), 'class': cls})
+    df = pd.DataFrame(rows)
+    df_tv, df_test = train_test_split(
+        df, test_size=0.10, stratify=df['class'], random_state=seed)
+    df_train, df_val = train_test_split(
+        df_tv, test_size=2/9, stratify=df_tv['class'], random_state=seed)
+    return (df_train.reset_index(drop=True),
+            df_val.reset_index(drop=True),
+            df_test.reset_index(drop=True))
+
+
 def load_test_data(data_path: str, seed: int = 42):
-    datagen = ImageDataGenerator(rescale=1.0 / 255.0, validation_split=0.1)
-    gen = datagen.flow_from_directory(
-        data_path,
-        target_size=(224, 224),
-        batch_size=1,
-        class_mode='sparse',
-        classes=CLASS_NAMES_4,
-        subset='validation',
+    """Load test split (10%) into memory as numpy arrays."""
+    _, _, df_test = _make_file_splits(data_path, seed)
+
+    datagen = ImageDataGenerator(rescale=1.0 / 255.0)
+    gen = datagen.flow_from_dataframe(
+        df_test,
+        x_col='filename', y_col='class',
+        target_size=(224, 224), batch_size=1,
+        classes=CLASS_NAMES_4, class_mode='sparse',
         shuffle=False,
-        seed=seed,
     )
+
     images, labels = [], []
     for i in range(len(gen)):
         x, y = gen[i]
@@ -137,7 +157,7 @@ def load_test_data(data_path: str, seed: int = 42):
 
     images = np.array(images)
     labels = np.array(labels, dtype=np.int32)
-    print(f'Test set: {len(images)} samples')
+    print(f'Test set (10%): {len(images)} samples')
     for c, cnt in zip(*np.unique(labels, return_counts=True)):
         print(f'  {CLASS_NAMES_4[c]}: {cnt}')
     return images, labels

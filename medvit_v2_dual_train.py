@@ -29,9 +29,11 @@ from datetime import datetime
 warnings.filterwarnings('ignore')
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
+import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from sklearn.model_selection import train_test_split
 from sklearn.utils.class_weight import compute_class_weight
 
 from medvit_v2_architecture import (
@@ -57,7 +59,27 @@ NUM_CLASSES = 4
 # DATA
 # ══════════════════════════════════════════════════════════════════════
 
+def make_file_splits(data_path: str, seed: int = 42):
+    """Stratified 70 / 20 / 10 split. Returns (df_train, df_val, df_test)."""
+    rows = []
+    for cls in CLASS_NAMES:
+        for ext in ('*.jpg', '*.jpeg', '*.png', '*.JPG', '*.JPEG', '*.PNG'):
+            for fp in Path(data_path).joinpath(cls).glob(ext):
+                rows.append({'filename': str(fp), 'class': cls})
+    df = pd.DataFrame(rows)
+    df_tv, df_test = train_test_split(
+        df, test_size=0.10, stratify=df['class'], random_state=seed)
+    df_train, df_val = train_test_split(
+        df_tv, test_size=2/9, stratify=df_tv['class'], random_state=seed)
+    return (df_train.reset_index(drop=True),
+            df_val.reset_index(drop=True),
+            df_test.reset_index(drop=True))
+
+
 def make_generators(data_path: str, batch_size: int, seed: int = 42):
+    """Train (70%) and val (20%) generators; test (10%) held out for evaluation."""
+    df_train, df_val, df_test = make_file_splits(data_path, seed)
+
     aug = ImageDataGenerator(
         rescale=1.0 / 255,
         rotation_range=15,
@@ -67,18 +89,18 @@ def make_generators(data_path: str, batch_size: int, seed: int = 42):
         zoom_range=0.1,
         brightness_range=[0.9, 1.1],
         fill_mode='nearest',
-        validation_split=0.2,
     )
-    val_gen_cfg = ImageDataGenerator(rescale=1.0 / 255, validation_split=0.2)
+    val_datagen = ImageDataGenerator(rescale=1.0 / 255)
 
-    common = dict(directory=data_path, target_size=IMG_SIZE,
-                  batch_size=batch_size, classes=CLASS_NAMES,
-                  class_mode='categorical', seed=seed)
+    common = dict(x_col='filename', y_col='class', target_size=IMG_SIZE,
+                  batch_size=batch_size, classes=CLASS_NAMES, class_mode='categorical')
 
-    train_gen = aug.flow_from_directory(subset='training',   shuffle=True,  **common)
-    val_gen   = val_gen_cfg.flow_from_directory(subset='validation', shuffle=False, **common)
+    train_gen = aug.flow_from_dataframe(df_train, shuffle=True,  seed=seed, **common)
+    val_gen   = val_datagen.flow_from_dataframe(df_val, shuffle=False, **common)
 
-    print(f'Train: {train_gen.samples} samples  Val: {val_gen.samples} samples')
+    print(f'Train: {len(df_train)} samples  '
+          f'Val: {len(df_val)} samples  '
+          f'Test (held out): {len(df_test)} samples')
     return train_gen, val_gen
 
 

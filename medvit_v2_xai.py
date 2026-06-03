@@ -30,9 +30,11 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm_lib
 
 import cv2
+import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from sklearn.model_selection import train_test_split
 
 from medvit_v2_architecture import (
     build_medvit_v2, LayerNorm2D, KANLayer, LFFNLayer, DiNALayer,
@@ -188,32 +190,45 @@ def overlay_heatmap(img_rgb: np.ndarray, heatmap: np.ndarray,
 # DATA LOADING
 # ══════════════════════════════════════════════════════════════════════
 
+def make_file_splits(data_path: str, seed: int = 42):
+    """Stratified 70 / 20 / 10 split. Returns (df_train, df_val, df_test)."""
+    rows = []
+    for cls in CLASS_NAMES:
+        for ext in ('*.jpg', '*.jpeg', '*.png', '*.JPG', '*.JPEG', '*.PNG'):
+            for fp in Path(data_path).joinpath(cls).glob(ext):
+                rows.append({'filename': str(fp), 'class': cls})
+    df = pd.DataFrame(rows)
+    df_tv, df_test = train_test_split(
+        df, test_size=0.10, stratify=df['class'], random_state=seed)
+    df_train, df_val = train_test_split(
+        df_tv, test_size=2/9, stratify=df_tv['class'], random_state=seed)
+    return (df_train.reset_index(drop=True),
+            df_val.reset_index(drop=True),
+            df_test.reset_index(drop=True))
+
+
 def load_samples(data_path: str, n_samples: int, seed: int = 42):
-    """
-    Load n_samples images from the validation split with their true labels.
-    Returns (images_raw, y_true, filenames) where images_raw are in [0,1].
-    """
-    datagen = ImageDataGenerator(rescale=1.0 / 255, validation_split=0.2)
-    gen = datagen.flow_from_directory(
-        data_path,
-        target_size=IMG_SIZE,
-        batch_size=1,
-        classes=CLASS_NAMES,
-        class_mode='sparse',
-        subset='validation',
-        shuffle=True,
-        seed=seed,
+    """Load n_samples from the test split (10%). Returns (images, labels, filenames)."""
+    _, _, df_test = make_file_splits(data_path, seed)
+    df_sample = df_test.sample(min(n_samples, len(df_test)), random_state=seed)
+
+    datagen = ImageDataGenerator(rescale=1.0 / 255)
+    gen = datagen.flow_from_dataframe(
+        df_sample,
+        x_col='filename', y_col='class',
+        target_size=IMG_SIZE, batch_size=1,
+        classes=CLASS_NAMES, class_mode='sparse',
+        shuffle=False,
     )
 
-    images, labels, fnames = [], [], []
-    total = min(n_samples, gen.samples)
-    for _ in range(total):
+    images, labels = [], []
+    for _ in range(len(gen)):
         x, y = next(gen)
         images.append(x[0])
         labels.append(int(y[0]))
-        fnames.append(gen.filenames[gen.batch_index - 1])
 
-    print(f'Loaded {len(images)} samples for XAI.')
+    fnames = list(df_sample['filename'].values)
+    print(f'Loaded {len(images)} samples for XAI from test split (10%).')
     return np.array(images), np.array(labels), fnames
 
 

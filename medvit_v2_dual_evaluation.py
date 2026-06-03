@@ -31,9 +31,11 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import (
     classification_report, confusion_matrix, roc_auc_score,
     roc_curve, precision_recall_fscore_support, accuracy_score
@@ -73,17 +75,32 @@ CUSTOM_OBJECTS = {
 # DATA
 # ══════════════════════════════════════════════════════════════════════
 
+def make_file_splits(data_path: str, seed: int = 42):
+    """Stratified 70 / 20 / 10 split. Returns (df_train, df_val, df_test)."""
+    rows = []
+    for cls in CLASS_NAMES:
+        for ext in ('*.jpg', '*.jpeg', '*.png', '*.JPG', '*.JPEG', '*.PNG'):
+            for fp in Path(data_path).joinpath(cls).glob(ext):
+                rows.append({'filename': str(fp), 'class': cls})
+    df = pd.DataFrame(rows)
+    df_tv, df_test = train_test_split(
+        df, test_size=0.10, stratify=df['class'], random_state=seed)
+    df_train, df_val = train_test_split(
+        df_tv, test_size=2/9, stratify=df_tv['class'], random_state=seed)
+    return (df_train.reset_index(drop=True),
+            df_val.reset_index(drop=True),
+            df_test.reset_index(drop=True))
+
+
 def load_test_generator(data_path: str, batch_size: int = 32, seed: int = 42):
-    datagen = ImageDataGenerator(rescale=1.0 / 255, validation_split=0.2)
-    gen = datagen.flow_from_directory(
-        data_path,
-        target_size=IMG_SIZE,
-        batch_size=batch_size,
-        classes=CLASS_NAMES,
-        class_mode='categorical',
-        subset='validation',
+    _, _, df_test = make_file_splits(data_path, seed)
+    datagen = ImageDataGenerator(rescale=1.0 / 255)
+    gen = datagen.flow_from_dataframe(
+        df_test,
+        x_col='filename', y_col='class',
+        target_size=IMG_SIZE, batch_size=batch_size,
+        classes=CLASS_NAMES, class_mode='categorical',
         shuffle=False,
-        seed=seed,
     )
     print(f'Test generator: {gen.samples} samples in {len(gen)} batches')
     return gen
