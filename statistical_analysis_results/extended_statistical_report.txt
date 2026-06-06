@@ -1,0 +1,135 @@
+================================================================================
+EXTENDED STATISTICAL SIGNIFICANCE ANALYSIS REPORT
+Brain Tumor Classification — MedViT V2 vs All Models
+================================================================================
+Date: 2026-06-06 17:25:30
+Common evaluation subset: 503 samples
+Models compared: 9
+Significance level (alpha): 0.05
+
+MODEL ACCURACIES (sorted by avg rank)
+------------------------------------------------------------
+  Binary CNN                             acc=0.9960 (99.60%)  rank=4.757
+  MedViT V2 Dual                         acc=0.9781 (97.81%)  rank=4.838
+  3-Class CNN                            acc=0.9742 (97.42%)  rank=4.856
+  4-Class CNN                            acc=0.9543 (95.43%)  rank=4.945
+  Multi-Dual System                      acc=0.9443 (94.43%)  rank=4.990
+  1-vs-1 Ensemble                        acc=0.9304 (93.04%)  rank=5.053
+  EfficientNet Dual                      acc=0.9205 (92.05%)  rank=5.097
+  MedViT V2                              acc=0.9145 (91.45%)  rank=5.124
+  ResNet-50 Dual                         acc=0.8668 (86.68%)  rank=5.339
+
+1. FRIEDMAN TEST
+------------------------------------------------------------
+  χ²=164.4535
+  p=0.000000
+  Significant: YES
+
+2. CRITICAL DIFFERENCE
+------------------------------------------------------------
+  CD (alpha=0.05): 0.5357
+
+3. WILCOXON SIGNED-RANK + BONFERRONI
+------------------------------------------------------------
+  Comparisons: 36, adj. alpha: 0.001389
+  Binary CNN                     vs ResNet-50 Dual                 p_bonf=0.0000 sig=YES
+  ResNet-50 Dual                 vs MedViT V2 Dual                 p_bonf=0.0000 sig=YES
+  3-Class CNN                    vs ResNet-50 Dual                 p_bonf=0.0000 sig=YES
+  Binary CNN                     vs MedViT V2                      p_bonf=0.0000 sig=YES
+  Binary CNN                     vs EfficientNet Dual              p_bonf=0.0000 sig=YES
+  4-Class CNN                    vs ResNet-50 Dual                 p_bonf=0.0000 sig=YES
+  Binary CNN                     vs 1-vs-1 Ensemble                p_bonf=0.0000 sig=YES
+  MedViT V2                      vs MedViT V2 Dual                 p_bonf=0.0000 sig=YES
+  ResNet-50 Dual                 vs Multi-Dual System              p_bonf=0.0000 sig=YES
+  Binary CNN                     vs Multi-Dual System              p_bonf=0.0000 sig=YES
+  EfficientNet Dual              vs MedViT V2 Dual                 p_bonf=0.0001 sig=YES
+  1-vs-1 Ensemble                vs MedViT V2 Dual                 p_bonf=0.0004 sig=YES
+  Binary CNN                     vs 4-Class CNN                    p_bonf=0.0004 sig=YES
+  3-Class CNN                    vs MedViT V2                      p_bonf=0.0005 sig=YES
+  1-vs-1 Ensemble                vs ResNet-50 Dual                 p_bonf=0.0017 sig=YES
+  3-Class CNN                    vs EfficientNet Dual              p_bonf=0.0021 sig=YES
+  Multi-Dual System              vs MedViT V2 Dual                 p_bonf=0.0035 sig=YES
+  ResNet-50 Dual                 vs EfficientNet Dual              p_bonf=0.0056 sig=YES
+  3-Class CNN                    vs 1-vs-1 Ensemble                p_bonf=0.0058 sig=YES
+  ResNet-50 Dual                 vs MedViT V2                      p_bonf=0.0145 sig=YES
+  4-Class CNN                    vs MedViT V2 Dual                 p_bonf=0.0192 sig=YES
+  4-Class CNN                    vs EfficientNet Dual              p_bonf=0.0815 sig=NO
+  4-Class CNN                    vs MedViT V2                      p_bonf=0.0925 sig=NO
+  Binary CNN                     vs 3-Class CNN                    p_bonf=0.1623 sig=NO
+  3-Class CNN                    vs Multi-Dual System              p_bonf=0.1924 sig=NO
+  Binary CNN                     vs MedViT V2 Dual                 p_bonf=0.2396 sig=NO
+  Multi-Dual System              vs MedViT V2                      p_bonf=0.9125 sig=NO
+  4-Class CNN                    vs 3-Class CNN                    p_bonf=1.0000 sig=NO
+  4-Class CNN                    vs 1-vs-1 Ensemble                p_bonf=1.0000 sig=NO
+  4-Class CNN                    vs Multi-Dual System              p_bonf=1.0000 sig=NO
+  3-Class CNN                    vs MedViT V2 Dual                 p_bonf=1.0000 sig=NO
+  1-vs-1 Ensemble                vs EfficientNet Dual              p_bonf=1.0000 sig=NO
+  1-vs-1 Ensemble                vs Multi-Dual System              p_bonf=1.0000 sig=NO
+  1-vs-1 Ensemble                vs MedViT V2                      p_bonf=1.0000 sig=NO
+  EfficientNet Dual              vs Multi-Dual System              p_bonf=1.0000 sig=NO
+  EfficientNet Dual              vs MedViT V2                      p_bonf=1.0000 sig=NO
+
+SUMMARY
+------------------------------------------------------------
+  Significant pairs: 21/36
+    Binary CNN vs 4-Class CNN (better: Binary CNN, p_bonf=0.0004)
+    Binary CNN vs 1-vs-1 Ensemble (better: Binary CNN, p_bonf=0.0000)
+    Binary CNN vs ResNet-50 Dual (better: Binary CNN, p_bonf=0.0000)
+    Binary CNN vs EfficientNet Dual (better: Binary CNN, p_bonf=0.0000)
+    Binary CNN vs Multi-Dual System (better: Binary CNN, p_bonf=0.0000)
+    Binary CNN vs MedViT V2 (better: Binary CNN, p_bonf=0.0000)
+    4-Class CNN vs ResNet-50 Dual (better: 4-Class CNN, p_bonf=0.0000)
+    4-Class CNN vs MedViT V2 Dual (better: MedViT V2 Dual, p_bonf=0.0192)
+    3-Class CNN vs 1-vs-1 Ensemble (better: 3-Class CNN, p_bonf=0.0058)
+    3-Class CNN vs ResNet-50 Dual (better: 3-Class CNN, p_bonf=0.0000)
+    3-Class CNN vs EfficientNet Dual (better: 3-Class CNN, p_bonf=0.0021)
+    3-Class CNN vs MedViT V2 (better: 3-Class CNN, p_bonf=0.0005)
+    1-vs-1 Ensemble vs ResNet-50 Dual (better: 1-vs-1 Ensemble, p_bonf=0.0017)
+    1-vs-1 Ensemble vs MedViT V2 Dual (better: MedViT V2 Dual, p_bonf=0.0004)
+    ResNet-50 Dual vs EfficientNet Dual (better: EfficientNet Dual, p_bonf=0.0056)
+    ResNet-50 Dual vs Multi-Dual System (better: Multi-Dual System, p_bonf=0.0000)
+    ResNet-50 Dual vs MedViT V2 (better: MedViT V2, p_bonf=0.0145)
+    ResNet-50 Dual vs MedViT V2 Dual (better: MedViT V2 Dual, p_bonf=0.0000)
+    EfficientNet Dual vs MedViT V2 Dual (better: MedViT V2 Dual, p_bonf=0.0001)
+    Multi-Dual System vs MedViT V2 Dual (better: MedViT V2 Dual, p_bonf=0.0035)
+    MedViT V2 vs MedViT V2 Dual (better: MedViT V2 Dual, p_bonf=0.0000)
+
+4. COHENS d EFFECT SIZE
+------------------------------------------------------------
+  Binary CNN                     vs ResNet-50 Dual                 d=0.5283 (Medium) better=Binary CNN
+  ResNet-50 Dual                 vs MedViT V2 Dual                 d=0.4252 (Small) better=MedViT V2 Dual
+  3-Class CNN                    vs ResNet-50 Dual                 d=0.4044 (Small) better=3-Class CNN
+  Binary CNN                     vs MedViT V2                      d=0.4018 (Small) better=Binary CNN
+  Binary CNN                     vs EfficientNet Dual              d=0.3842 (Small) better=Binary CNN
+  Binary CNN                     vs 1-vs-1 Ensemble                d=0.3536 (Small) better=Binary CNN
+  4-Class CNN                    vs ResNet-50 Dual                 d=0.3098 (Small) better=4-Class CNN
+  Binary CNN                     vs Multi-Dual System              d=0.3072 (Small) better=Binary CNN
+  MedViT V2                      vs MedViT V2 Dual                 d=0.2848 (Small) better=MedViT V2 Dual
+  Binary CNN                     vs 4-Class CNN                    d=0.2704 (Small) better=Binary CNN
+  ResNet-50 Dual                 vs Multi-Dual System              d=0.2672 (Small) better=Multi-Dual System
+  EfficientNet Dual              vs MedViT V2 Dual                 d=0.2648 (Small) better=MedViT V2 Dual
+  3-Class CNN                    vs MedViT V2                      d=0.2621 (Small) better=3-Class CNN
+  3-Class CNN                    vs EfficientNet Dual              d=0.2418 (Small) better=3-Class CNN
+  1-vs-1 Ensemble                vs MedViT V2 Dual                 d=0.2297 (Small) better=MedViT V2 Dual
+  1-vs-1 Ensemble                vs ResNet-50 Dual                 d=0.2117 (Small) better=1-vs-1 Ensemble
+  3-Class CNN                    vs 1-vs-1 Ensemble                d=0.2061 (Small) better=3-Class CNN
+  Binary CNN                     vs 3-Class CNN                    d=0.1810 (Negligible) better=Binary CNN
+  Multi-Dual System              vs MedViT V2 Dual                 d=0.1756 (Negligible) better=MedViT V2 Dual
+  ResNet-50 Dual                 vs EfficientNet Dual              d=0.1746 (Negligible) better=EfficientNet Dual
+  4-Class CNN                    vs MedViT V2                      d=0.1610 (Negligible) better=4-Class CNN
+  Binary CNN                     vs MedViT V2 Dual                 d=0.1588 (Negligible) better=Binary CNN
+  ResNet-50 Dual                 vs MedViT V2                      d=0.1532 (Negligible) better=MedViT V2
+  3-Class CNN                    vs Multi-Dual System              d=0.1511 (Negligible) better=3-Class CNN
+  4-Class CNN                    vs EfficientNet Dual              d=0.1397 (Negligible) better=4-Class CNN
+  4-Class CNN                    vs MedViT V2 Dual                 d=0.1322 (Negligible) better=MedViT V2 Dual
+  Multi-Dual System              vs MedViT V2                      d=0.1165 (Negligible) better=Multi-Dual System
+  4-Class CNN                    vs 3-Class CNN                    d=0.1071 (Negligible) better=3-Class CNN
+  4-Class CNN                    vs 1-vs-1 Ensemble                d=0.1024 (Negligible) better=4-Class CNN
+  EfficientNet Dual              vs Multi-Dual System              d=0.0950 (Negligible) better=Multi-Dual System
+  1-vs-1 Ensemble                vs MedViT V2                      d=0.0594 (Negligible) better=1-vs-1 Ensemble
+  1-vs-1 Ensemble                vs Multi-Dual System              d=0.0574 (Negligible) better=Multi-Dual System
+  4-Class CNN                    vs Multi-Dual System              d=0.0453 (Negligible) better=4-Class CNN
+  1-vs-1 Ensemble                vs EfficientNet Dual              d=0.0378 (Negligible) better=1-vs-1 Ensemble
+  3-Class CNN                    vs MedViT V2 Dual                 d=0.0260 (Negligible) better=MedViT V2 Dual
+  EfficientNet Dual              vs MedViT V2                      d=0.0217 (Negligible) better=EfficientNet Dual
+================================================================================

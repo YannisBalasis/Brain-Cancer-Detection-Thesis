@@ -1,0 +1,754 @@
+{
+  "friedman": {
+    "statistic": 164.4534883720861,
+    "p_value": 1.8715686527486189e-31,
+    "significant": true,
+    "model_names": [
+      "Binary CNN",
+      "4-Class CNN",
+      "3-Class CNN",
+      "1-vs-1 Ensemble",
+      "ResNet-50 Dual",
+      "EfficientNet Dual",
+      "Multi-Dual System",
+      "MedViT V2",
+      "MedViT V2 Dual"
+    ]
+  },
+  "wilcoxon_bonferroni": [
+    {
+      "model_1": "Binary CNN",
+      "model_2": "4-Class CNN",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9542743538767395,
+      "better_model": "Binary CNN",
+      "statistic": 12.0,
+      "p_raw": 1.1933310815418253e-05,
+      "p_bonferroni": 0.0004295991893550571,
+      "significant": true
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "3-Class CNN",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.974155069582505,
+      "better_model": "Binary CNN",
+      "statistic": 16.0,
+      "p_raw": 0.0045086983649042355,
+      "p_bonferroni": 0.16231314113655249,
+      "significant": false
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "1-vs-1 Ensemble",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9304174950298211,
+      "better_model": "Binary CNN",
+      "statistic": 38.0,
+      "p_raw": 5.790051557115313e-08,
+      "p_bonferroni": 2.084418560561513e-06,
+      "significant": true
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.8667992047713717,
+      "better_model": "Binary CNN",
+      "statistic": 0.0,
+      "p_raw": 7.489807028252661e-16,
+      "p_bonferroni": 2.696330530170958e-14,
+      "significant": true
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9204771371769384,
+      "better_model": "Binary CNN",
+      "statistic": 20.5,
+      "p_raw": 1.874468450406541e-09,
+      "p_bonferroni": 6.748086421463548e-08,
+      "significant": true
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9443339960238568,
+      "better_model": "Binary CNN",
+      "statistic": 0.0,
+      "p_raw": 3.414173577297533e-07,
+      "p_bonferroni": 1.2291024878271118e-05,
+      "significant": true
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9145129224652088,
+      "better_model": "Binary CNN",
+      "statistic": 22.0,
+      "p_raw": 4.040854277244357e-10,
+      "p_bonferroni": 1.4547075398079686e-08,
+      "significant": true
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9781312127236581,
+      "better_model": "Binary CNN",
+      "statistic": 6.0,
+      "p_raw": 0.006655605482949377,
+      "p_bonferroni": 0.23960179738617757,
+      "significant": false
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "3-Class CNN",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.974155069582505,
+      "better_model": "3-Class CNN",
+      "statistic": 108.0,
+      "p_raw": 0.04986020375690694,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "1-vs-1 Ensemble",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.9304174950298211,
+      "better_model": "4-Class CNN",
+      "statistic": 192.5,
+      "p_raw": 0.039591763236690385,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.8667992047713717,
+      "better_model": "4-Class CNN",
+      "statistic": 171.0,
+      "p_raw": 4.108932323233132e-09,
+      "p_bonferroni": 1.4792156363639276e-07,
+      "significant": true
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.9204771371769384,
+      "better_model": "4-Class CNN",
+      "statistic": 112.0,
+      "p_raw": 0.002263469812035174,
+      "p_bonferroni": 0.08148491323326626,
+      "significant": false
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.9443339960238568,
+      "better_model": "4-Class CNN",
+      "statistic": 108.0,
+      "p_raw": 0.2971465303484704,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.9145129224652088,
+      "better_model": "4-Class CNN",
+      "statistic": 270.0,
+      "p_raw": 0.002568831527022717,
+      "p_bonferroni": 0.09247793497281781,
+      "significant": false
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.9781312127236581,
+      "better_model": "MedViT V2 Dual",
+      "statistic": 0.0,
+      "p_raw": 0.0005320055051392492,
+      "p_bonferroni": 0.019152198185012972,
+      "significant": true
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "1-vs-1 Ensemble",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.9304174950298211,
+      "better_model": "3-Class CNN",
+      "statistic": 105.0,
+      "p_raw": 0.0001613164203086197,
+      "p_bonferroni": 0.005807391131110309,
+      "significant": true
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.8667992047713717,
+      "better_model": "3-Class CNN",
+      "statistic": 241.5,
+      "p_raw": 5.8132692499589263e-11,
+      "p_bonferroni": 2.0927769299852134e-09,
+      "significant": true
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.9204771371769384,
+      "better_model": "3-Class CNN",
+      "statistic": 207.0,
+      "p_raw": 5.699411623331837e-05,
+      "p_bonferroni": 0.0020517881843994615,
+      "significant": true
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.9443339960238568,
+      "better_model": "3-Class CNN",
+      "statistic": 105.0,
+      "p_raw": 0.005345676872654233,
+      "p_bonferroni": 0.1924443674155524,
+      "significant": false
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.9145129224652088,
+      "better_model": "3-Class CNN",
+      "statistic": 220.5,
+      "p_raw": 1.4902335792427691e-05,
+      "p_bonferroni": 0.0005364840885273968,
+      "significant": true
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.9781312127236581,
+      "better_model": "MedViT V2 Dual",
+      "statistic": 59.5,
+      "p_raw": 0.6170750774519738,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.9304174950298211,
+      "accuracy_2": 0.8667992047713717,
+      "better_model": "1-vs-1 Ensemble",
+      "statistic": 472.5,
+      "p_raw": 4.8237985237375935e-05,
+      "p_bonferroni": 0.0017365674685455336,
+      "significant": true
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.9304174950298211,
+      "accuracy_2": 0.9204771371769384,
+      "better_model": "1-vs-1 Ensemble",
+      "statistic": 504.0,
+      "p_raw": 0.4658029092418442,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9304174950298211,
+      "accuracy_2": 0.9443339960238568,
+      "better_model": "Multi-Dual System",
+      "statistic": 285.0,
+      "p_raw": 0.24981744183594812,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.9304174950298211,
+      "accuracy_2": 0.9145129224652088,
+      "better_model": "1-vs-1 Ensemble",
+      "statistic": 405.0,
+      "p_raw": 0.22779999398822903,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9304174950298211,
+      "accuracy_2": 0.9781312127236581,
+      "better_model": "MedViT V2 Dual",
+      "statistic": 46.5,
+      "p_raw": 1.177133909761497e-05,
+      "p_bonferroni": 0.00042376820751413894,
+      "significant": true
+    },
+    {
+      "model_1": "ResNet-50 Dual",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.8667992047713717,
+      "accuracy_2": 0.9204771371769384,
+      "better_model": "EfficientNet Dual",
+      "statistic": 312.0,
+      "p_raw": 0.00015635271159998695,
+      "p_bonferroni": 0.005628697617599531,
+      "significant": true
+    },
+    {
+      "model_1": "ResNet-50 Dual",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.8667992047713717,
+      "accuracy_2": 0.9443339960238568,
+      "better_model": "Multi-Dual System",
+      "statistic": 261.0,
+      "p_raw": 2.395712291485021e-07,
+      "p_bonferroni": 8.624564249346076e-06,
+      "significant": true
+    },
+    {
+      "model_1": "ResNet-50 Dual",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.8667992047713717,
+      "accuracy_2": 0.9145129224652088,
+      "better_model": "MedViT V2",
+      "statistic": 258.5,
+      "p_raw": 0.00040224430206061123,
+      "p_bonferroni": 0.014480794874182005,
+      "significant": true
+    },
+    {
+      "model_1": "ResNet-50 Dual",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.8667992047713717,
+      "accuracy_2": 0.9781312127236581,
+      "better_model": "MedViT V2 Dual",
+      "statistic": 61.0,
+      "p_raw": 4.845295928589443e-13,
+      "p_bonferroni": 1.7443065342921997e-11,
+      "significant": true
+    },
+    {
+      "model_1": "EfficientNet Dual",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9204771371769384,
+      "accuracy_2": 0.9443339960238568,
+      "better_model": "Multi-Dual System",
+      "statistic": 222.0,
+      "p_raw": 0.04550026389635839,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "EfficientNet Dual",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.9204771371769384,
+      "accuracy_2": 0.9145129224652088,
+      "better_model": "EfficientNet Dual",
+      "statistic": 440.0,
+      "p_raw": 0.6473147843885203,
+      "p_bonferroni": 1.0,
+      "significant": false
+    },
+    {
+      "model_1": "EfficientNet Dual",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9204771371769384,
+      "accuracy_2": 0.9781312127236581,
+      "better_model": "MedViT V2 Dual",
+      "statistic": 76.0,
+      "p_raw": 1.8646063481805932e-06,
+      "p_bonferroni": 6.712582853450136e-05,
+      "significant": true
+    },
+    {
+      "model_1": "Multi-Dual System",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.9443339960238568,
+      "accuracy_2": 0.9145129224652088,
+      "better_model": "Multi-Dual System",
+      "statistic": 345.0,
+      "p_raw": 0.025347318677468252,
+      "p_bonferroni": 0.9125034723888571,
+      "significant": false
+    },
+    {
+      "model_1": "Multi-Dual System",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9443339960238568,
+      "accuracy_2": 0.9781312127236581,
+      "better_model": "MedViT V2 Dual",
+      "statistic": 10.0,
+      "p_raw": 9.616588268883476e-05,
+      "p_bonferroni": 0.003461971776798051,
+      "significant": true
+    },
+    {
+      "model_1": "MedViT V2",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9145129224652088,
+      "accuracy_2": 0.9781312127236581,
+      "better_model": "MedViT V2 Dual",
+      "statistic": 37.0,
+      "p_raw": 9.64260673022825e-08,
+      "p_bonferroni": 3.47133842288217e-06,
+      "significant": true
+    }
+  ],
+  "cohens_d": [
+    {
+      "model_1": "Binary CNN",
+      "model_2": "4-Class CNN",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9542743538767395,
+      "cohens_d": 0.27036648021137155,
+      "interpretation": "Small",
+      "better_model": "Binary CNN"
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "3-Class CNN",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.974155069582505,
+      "cohens_d": 0.18100179665035493,
+      "interpretation": "Negligible",
+      "better_model": "Binary CNN"
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "1-vs-1 Ensemble",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9304174950298211,
+      "cohens_d": 0.3536282329974462,
+      "interpretation": "Small",
+      "better_model": "Binary CNN"
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.8667992047713717,
+      "cohens_d": 0.5283139862575569,
+      "interpretation": "Medium",
+      "better_model": "Binary CNN"
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9204771371769384,
+      "cohens_d": 0.3842415329517713,
+      "interpretation": "Small",
+      "better_model": "Binary CNN"
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9443339960238568,
+      "cohens_d": 0.30715516666443166,
+      "interpretation": "Small",
+      "better_model": "Binary CNN"
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9145129224652088,
+      "cohens_d": 0.40181213662272164,
+      "interpretation": "Small",
+      "better_model": "Binary CNN"
+    },
+    {
+      "model_1": "Binary CNN",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9960238568588469,
+      "accuracy_2": 0.9781312127236581,
+      "cohens_d": 0.15876724015339336,
+      "interpretation": "Negligible",
+      "better_model": "Binary CNN"
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "3-Class CNN",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.974155069582505,
+      "cohens_d": 0.10707386470795356,
+      "interpretation": "Negligible",
+      "better_model": "3-Class CNN"
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "1-vs-1 Ensemble",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.9304174950298211,
+      "cohens_d": 0.10238359731334434,
+      "interpretation": "Negligible",
+      "better_model": "4-Class CNN"
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.8667992047713717,
+      "cohens_d": 0.3098430851676107,
+      "interpretation": "Small",
+      "better_model": "4-Class CNN"
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.9204771371769384,
+      "cohens_d": 0.1396945845395185,
+      "interpretation": "Negligible",
+      "better_model": "4-Class CNN"
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.9443339960238568,
+      "cohens_d": 0.045278557371686505,
+      "interpretation": "Negligible",
+      "better_model": "4-Class CNN"
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.9145129224652088,
+      "cohens_d": 0.16095206104719081,
+      "interpretation": "Negligible",
+      "better_model": "4-Class CNN"
+    },
+    {
+      "model_1": "4-Class CNN",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9542743538767395,
+      "accuracy_2": 0.9781312127236581,
+      "cohens_d": 0.13217665577313034,
+      "interpretation": "Negligible",
+      "better_model": "MedViT V2 Dual"
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "1-vs-1 Ensemble",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.9304174950298211,
+      "cohens_d": 0.20607003468837853,
+      "interpretation": "Small",
+      "better_model": "3-Class CNN"
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.8667992047713717,
+      "cohens_d": 0.4044468395029633,
+      "interpretation": "Small",
+      "better_model": "3-Class CNN"
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.9204771371769384,
+      "cohens_d": 0.2417876864553244,
+      "interpretation": "Small",
+      "better_model": "3-Class CNN"
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.9443339960238568,
+      "cohens_d": 0.15110260199312295,
+      "interpretation": "Negligible",
+      "better_model": "3-Class CNN"
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.9145129224652088,
+      "cohens_d": 0.2621007550179755,
+      "interpretation": "Small",
+      "better_model": "3-Class CNN"
+    },
+    {
+      "model_1": "3-Class CNN",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.974155069582505,
+      "accuracy_2": 0.9781312127236581,
+      "cohens_d": 0.026031749133442684,
+      "interpretation": "Negligible",
+      "better_model": "MedViT V2 Dual"
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "ResNet-50 Dual",
+      "accuracy_1": 0.9304174950298211,
+      "accuracy_2": 0.8667992047713717,
+      "cohens_d": 0.21173298499747709,
+      "interpretation": "Small",
+      "better_model": "1-vs-1 Ensemble"
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.9304174950298211,
+      "accuracy_2": 0.9204771371769384,
+      "cohens_d": 0.037812914677058905,
+      "interpretation": "Negligible",
+      "better_model": "1-vs-1 Ensemble"
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9304174950298211,
+      "accuracy_2": 0.9443339960238568,
+      "cohens_d": 0.05740489879088257,
+      "interpretation": "Negligible",
+      "better_model": "Multi-Dual System"
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.9304174950298211,
+      "accuracy_2": 0.9145129224652088,
+      "cohens_d": 0.059437240744846014,
+      "interpretation": "Negligible",
+      "better_model": "1-vs-1 Ensemble"
+    },
+    {
+      "model_1": "1-vs-1 Ensemble",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9304174950298211,
+      "accuracy_2": 0.9781312127236581,
+      "cohens_d": 0.22969183666135876,
+      "interpretation": "Small",
+      "better_model": "MedViT V2 Dual"
+    },
+    {
+      "model_1": "ResNet-50 Dual",
+      "model_2": "EfficientNet Dual",
+      "accuracy_1": 0.8667992047713717,
+      "accuracy_2": 0.9204771371769384,
+      "cohens_d": 0.17459902414799003,
+      "interpretation": "Negligible",
+      "better_model": "EfficientNet Dual"
+    },
+    {
+      "model_1": "ResNet-50 Dual",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.8667992047713717,
+      "accuracy_2": 0.9443339960238568,
+      "cohens_d": 0.2672339938834158,
+      "interpretation": "Small",
+      "better_model": "Multi-Dual System"
+    },
+    {
+      "model_1": "ResNet-50 Dual",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.8667992047713717,
+      "accuracy_2": 0.9145129224652088,
+      "cohens_d": 0.15319038973925425,
+      "interpretation": "Negligible",
+      "better_model": "MedViT V2"
+    },
+    {
+      "model_1": "ResNet-50 Dual",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.8667992047713717,
+      "accuracy_2": 0.9781312127236581,
+      "cohens_d": 0.4251892456469624,
+      "interpretation": "Small",
+      "better_model": "MedViT V2 Dual"
+    },
+    {
+      "model_1": "EfficientNet Dual",
+      "model_2": "Multi-Dual System",
+      "accuracy_1": 0.9204771371769384,
+      "accuracy_2": 0.9443339960238568,
+      "cohens_d": 0.095041662006182,
+      "interpretation": "Negligible",
+      "better_model": "Multi-Dual System"
+    },
+    {
+      "model_1": "EfficientNet Dual",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.9204771371769384,
+      "accuracy_2": 0.9145129224652088,
+      "cohens_d": 0.021657320901005347,
+      "interpretation": "Negligible",
+      "better_model": "EfficientNet Dual"
+    },
+    {
+      "model_1": "EfficientNet Dual",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9204771371769384,
+      "accuracy_2": 0.9781312127236581,
+      "cohens_d": 0.26484474775851646,
+      "interpretation": "Small",
+      "better_model": "MedViT V2 Dual"
+    },
+    {
+      "model_1": "Multi-Dual System",
+      "model_2": "MedViT V2",
+      "accuracy_1": 0.9443339960238568,
+      "accuracy_2": 0.9145129224652088,
+      "cohens_d": 0.11651755759164924,
+      "interpretation": "Negligible",
+      "better_model": "Multi-Dual System"
+    },
+    {
+      "model_1": "Multi-Dual System",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9443339960238568,
+      "accuracy_2": 0.9781312127236581,
+      "cohens_d": 0.17557864004761203,
+      "interpretation": "Negligible",
+      "better_model": "MedViT V2 Dual"
+    },
+    {
+      "model_1": "MedViT V2",
+      "model_2": "MedViT V2 Dual",
+      "accuracy_1": 0.9145129224652088,
+      "accuracy_2": 0.9781312127236581,
+      "cohens_d": 0.2848403550115458,
+      "interpretation": "Small",
+      "better_model": "MedViT V2 Dual"
+    }
+  ],
+  "average_ranks": {
+    "Binary CNN": 4.757455268389662,
+    "4-Class CNN": 4.9453280318091455,
+    "3-Class CNN": 4.855864811133201,
+    "1-vs-1 Ensemble": 5.0526838966202785,
+    "ResNet-50 Dual": 5.3389662027833005,
+    "EfficientNet Dual": 5.09741550695825,
+    "Multi-Dual System": 4.990059642147117,
+    "MedViT V2": 5.1242544731610336,
+    "MedViT V2 Dual": 4.837972166998012
+  },
+  "critical_difference": 0.53567753125834
+}

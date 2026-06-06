@@ -1,0 +1,6 @@
+Confusion Matrix
+           glioma  meningio  no_tumor  pituitar
+  glioma       140        20         0         2
+meningio         0       147         6        12
+no_tumor         0         0       194         6
+pituitar         1         2         0       173

@@ -1,0 +1,44 @@
+{
+  "overall_accuracy": 0.930298719772404,
+  "macro_auc": 0.9921319361140132,
+  "macro_precision": 0.9322758359050897,
+  "macro_recall": 0.9270152918069584,
+  "macro_f1": 0.9280003267231937,
+  "macro_specificity": 0.9768450710721153,
+  "per_class": {
+    "glioma": {
+      "precision": 0.9929078014184397,
+      "recall": 0.8641975308641975,
+      "f1": 0.9240924092409241,
+      "specificity": 0.9981515711626652,
+      "auc": 0.9968508249469432,
+      "support": 162
+    },
+    "meningioma": {
+      "precision": 0.8698224852071006,
+      "recall": 0.8909090909090909,
+      "f1": 0.8802395209580838,
+      "specificity": 0.9591078066896671,
+      "auc": 0.9769066125943449,
+      "support": 165
+    },
+    "no_tumor": {
+      "precision": 0.97,
+      "recall": 0.97,
+      "f1": 0.97,
+      "specificity": 0.9880715705745764,
+      "auc": 0.9970775347912525,
+      "support": 200
+    },
+    "pituitary": {
+      "precision": 0.8963730569948186,
+      "recall": 0.9829545454545454,
+      "f1": 0.9376693766937668,
+      "specificity": 0.9620493358615521,
+      "auc": 0.9976927721235122,
+      "support": 176
+    }
+  },
+  "timestamp": "2026-06-06T13:32:13.824277",
+  "model_path": "/storage/data4/up1084631/medvit_v2_experiment_v2/best_medvit_v2_base.keras"
+}

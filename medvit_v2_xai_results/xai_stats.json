@@ -1,0 +1,40 @@
+{
+  "per_class": {
+    "glioma": {
+      "n": 11,
+      "accuracy": 0.9090909090909091,
+      "mean_confidence": 0.9655637632716786,
+      "mean_heatmap_activation": 0.23660852015018463,
+      "mean_heatmap_peak": 1.0
+    },
+    "meningioma": {
+      "n": 8,
+      "accuracy": 0.875,
+      "mean_confidence": 0.8765470460057259,
+      "mean_heatmap_activation": 0.2663889527320862,
+      "mean_heatmap_peak": 1.0
+    },
+    "no_tumor": {
+      "n": 12,
+      "accuracy": 1.0,
+      "mean_confidence": 0.9983146140972773,
+      "mean_heatmap_activation": 0.3871113955974579,
+      "mean_heatmap_peak": 1.0
+    },
+    "pituitary": {
+      "n": 9,
+      "accuracy": 1.0,
+      "mean_confidence": 0.9867194162474738,
+      "mean_heatmap_activation": 0.3321530520915985,
+      "mean_heatmap_peak": 1.0
+    }
+  },
+  "overall": {
+    "n_samples": 40,
+    "accuracy": 0.95,
+    "mean_conf": 0.9623456969857216,
+    "mean_heatmap_activation": 0.30921298265457153
+  },
+  "target_layer": "s4_l1_gfp0",
+  "model_path": "/storage/data4/up1084631/medvit_v2_experiment_v2/best_medvit_v2_base.keras"
+}

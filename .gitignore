@@ -3,8 +3,10 @@
 *.npz
 *.pth
 *.h5
+*.keras
 __pycache__/
 *.pyc
+*.DS_Store
 
 # Experiment folders (μεγάλα δεδομένα)
 binary_ensemble_*/
@@ -12,3 +14,5 @@ multiclass_*/
 dual_system_experiment_*/
 efnet_dual_system_experiment_*/
 improved_dual_experiment_*/
+medvit_v2_experiment_v2/
+medvit_v2_dual_experiment/
