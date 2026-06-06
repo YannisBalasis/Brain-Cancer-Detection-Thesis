@@ -82,9 +82,13 @@ def build_medvit_branch(medvit_model: keras.Model,
         name=f'{name_prefix}_extractor',
     )
 
-    feats = feat_extractor(inputs)                         # (B, H, W, C)
-    feats = layers.GlobalAveragePooling2D(
-        name=f'{name_prefix}_gap')(feats)                  # (B, C)
+    feats = feat_extractor(inputs)
+    out_rank = len(feat_extractor.output_shape)
+    if out_rank == 4:       # (B, H, W, C) — spatial
+        feats = layers.GlobalAveragePooling2D(name=f'{name_prefix}_gap')(feats)
+    elif out_rank == 3:     # (B, N, C) — sequence
+        feats = layers.GlobalAveragePooling1D(name=f'{name_prefix}_gap')(feats)
+    # out_rank == 2: already (B, C), use as-is
     return feats, feat_extractor
 
 
