@@ -176,8 +176,11 @@ def pick_representative_samples(images, labels, model, n_per_class: int = 1):
             correct_indices = cls_mask
             correct_confs   = confs
 
-        order   = np.argsort(-correct_confs)
-        chosen  = correct_indices[order[:n_per_class]]
+        # Use median-confidence image as the representative sample —
+        # avoids cherry-picking accusation while remaining objective.
+        median_rank = len(correct_confs) // 2
+        order       = np.argsort(correct_confs)
+        chosen      = correct_indices[order[median_rank:median_rank + n_per_class]]
         for i in chosen:
             rep_imgs.append(images[i])
             rep_lbls.append(cls_idx)
