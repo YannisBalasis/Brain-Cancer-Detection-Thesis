@@ -1,0 +1,61 @@
+{
+  "model_path": "/storage/data4/up1084631/medvit_v2_experiment_v2/best_medvit_v2_base.keras",
+  "target_layer": "s4_l1_gfp0",
+  "n_samples": 40,
+  "n_representative": 4,
+  "ig_steps": 50,
+  "occlusion_window": 28,
+  "occlusion_stride": 7,
+  "n_background": 20,
+  "shap_succeeded": true,
+  "per_class": {
+    "glioma": {
+      "true_class": "glioma",
+      "pred_class": "glioma",
+      "confidence": 0.9965546131134033,
+      "correct": true,
+      "gradcam_mean_activation": 0.26897993683815,
+      "ig_mean_activation": 0.0034269324969500303,
+      "occlusion_mean": 0.07858477532863617,
+      "occlusion_peak": 1.0,
+      "shap_available": true,
+      "shap_mean_activation": 5.46202645637095e-05
+    },
+    "meningioma": {
+      "true_class": "meningioma",
+      "pred_class": "meningioma",
+      "confidence": 0.9994231462478638,
+      "correct": true,
+      "gradcam_mean_activation": 0.3061996102333069,
+      "ig_mean_activation": 0.0085500068962574,
+      "occlusion_mean": 0.05145028978586197,
+      "occlusion_peak": 1.0,
+      "shap_available": true,
+      "shap_mean_activation": 2.846679308277089e-05
+    },
+    "no_tumor": {
+      "true_class": "no_tumor",
+      "pred_class": "no_tumor",
+      "confidence": 0.9997410178184509,
+      "correct": true,
+      "gradcam_mean_activation": 0.46385836601257324,
+      "ig_mean_activation": 0.011549587361514568,
+      "occlusion_mean": 0.22863376140594482,
+      "occlusion_peak": 1.0,
+      "shap_available": true,
+      "shap_mean_activation": 2.470869912940543e-05
+    },
+    "pituitary": {
+      "true_class": "pituitary",
+      "pred_class": "pituitary",
+      "confidence": 0.9990678429603577,
+      "correct": true,
+      "gradcam_mean_activation": 0.26333534717559814,
+      "ig_mean_activation": 0.016363494098186493,
+      "occlusion_mean": 0.12147098034620285,
+      "occlusion_peak": 1.0,
+      "shap_available": true,
+      "shap_mean_activation": 4.036997415823862e-05
+    }
+  }
+}
