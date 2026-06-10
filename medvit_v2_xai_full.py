@@ -286,22 +286,22 @@ def compute_integrated_gradients(model, img_array: np.ndarray,
         baseline = np.zeros_like(img_array)
 
     alphas      = np.linspace(0.0, 1.0, n_steps + 1, dtype=np.float32)
-    interpolated = np.array([
-        baseline + alpha * (img_array - baseline) for alpha in alphas
-    ], dtype=np.float32)
+    interpolated = [
+        (baseline + alpha * (img_array - baseline)).astype(np.float32)
+        for alpha in alphas
+    ]
 
-    batch_size = 10
     grads_list = []
-    for start in range(0, len(interpolated), batch_size):
-        batch = tf.constant(interpolated[start:start + batch_size])
+    for interp_img in interpolated:
+        batch = tf.constant(interp_img[np.newaxis])  # (1, H, W, 3)
         with tf.GradientTape() as tape:
             tape.watch(batch)
             preds = model(batch, training=False)
             score = preds[:, class_idx]
         grads = tape.gradient(score, batch)
-        grads_list.append(grads.numpy())
+        grads_list.append(grads.numpy()[0])  # (H, W, 3)
 
-    all_grads = np.concatenate(grads_list, axis=0)
+    all_grads = np.stack(grads_list, axis=0)  # (n_steps+1, H, W, 3)
     avg_grads = (all_grads[:-1] + all_grads[1:]) / 2.0
     mean_grads = np.mean(avg_grads, axis=0)
     ig = (img_array - baseline) * mean_grads
