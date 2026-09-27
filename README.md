@@ -11,10 +11,10 @@
 Deep Learning system for brain tumor classification from MRI images, combining **7 neural network architectures** with **4 XAI (Explainable AI) methods** and rigorous **statistical validation**.
 
 The system classifies MRI brain scans into 4 categories:
-- 🔴 **Glioma**
-- 🔵 **Meningioma**
-- 🟢 **No Tumor**
-- 🟡 **Pituitary Adenoma**
+-  **Glioma**
+-  **Meningioma**
+-  **No Tumor**
+-  **Pituitary Adenoma**
 
 ---
 
