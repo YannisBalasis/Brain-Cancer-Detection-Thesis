@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brain Tumour MRI · XAI</title>
+<meta name="description" content="Diploma thesis, University of Patras (CEID): nine deep learning architectures for brain tumour MRI classification, a hybrid CNN–Transformer, four explainable-AI methods and statistical significance testing.">
+<meta name="author" content="Ioannis Balasis">
+<meta property="og:title" content="Brain Tumour MRI Classification · Explainable AI">
+<meta property="og:description" content="Nine architectures, four XAI methods, one paradox. Diploma thesis, University of Patras, 2026.">
+<meta property="og:image" content="assets/xai/orig_meningioma_medvit.jpg">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%236250d6'/%3E%3Cpath d='M10 17c0-5 3-8 6-8s6 3 6 8-3 6-6 6-6-1-6-6z' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script>
+  // Apply saved preferences before first paint (no flash).
+  (function () {
+    try {
+      var p = new URLSearchParams(location.search).get('lang');
+      var l = p || localStorage.getItem('mri-lang') || 'en';
+      if (l !== 'el') l = 'en';
+      document.documentElement.lang = l;
+      document.documentElement.dataset.lang = l;
+      var t = localStorage.getItem('mri-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      var s = localStorage.getItem('mri-scale');
+      if (s) document.documentElement.style.setProperty('--scale', s);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="el">Μετάβαση στο περιεχόμενο</span></a>
+
+<canvas id="brain-bg" aria-hidden="true"></canvas>
+
+<header class="topbar" role="banner">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top" aria-label="Brain MRI · XAI, back to top">
+      <span class="brand-dot" aria-hidden="true"></span>MRI<span class="brand-sep">·</span>XAI
+    </a>
+    <nav class="tb-nav" aria-label="Sections">
+      <a href="#question"><span data-l="en">Question</span><span data-l="el">Ερώτημα</span></a>
+      <a href="#pipeline"><span data-l="en">Pipeline</span><span data-l="el">Ροή</span></a>
+      <a href="#models"><span data-l="en">Models</span><span data-l="el">Μοντέλα</span></a>
+      <a href="#results"><span data-l="en">Results</span><span data-l="el">Αποτελέσματα</span></a>
+      <a href="#stats"><span data-l="en">Statistics</span><span data-l="el">Στατιστική</span></a>
+      <a href="#xai"><span data-l="en">XAI demo</span><span data-l="el">XAI demo</span></a>
+      <a href="#paradox"><span data-l="en">Paradox</span><span data-l="el">Παράδοξο</span></a>
+      <a href="#app"><span data-l="en">Clinical app</span><span data-l="el">Κλινική εφαρμογή</span></a>
+      <a href="#conclusions"><span data-l="en">Conclusions</span><span data-l="el">Συμπεράσματα</span></a>
+    </nav>
+    <div class="tb-tools" role="group" aria-label="Display settings">
+      <button type="button" class="tool" id="btn-lang" aria-label="Ελληνικά / Switch to Greek">
+        <span data-l="en" lang="el">ΕΛ</span><span data-l="el" lang="en">EN</span>
+      </button>
+      <button type="button" class="tool" id="btn-text" aria-label="Text size">
+        <span aria-hidden="true">A<small>A</small></span>
+      </button>
+      <button type="button" class="tool" id="btn-theme" aria-label="Toggle dark mode">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
+      </button>
+      <button type="button" class="tool" id="btn-motion" aria-pressed="false" aria-label="Pause background animation">
+        <svg class="i-pause" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+        <svg class="i-play" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<!-- ═════════════ HERO ═════════════ -->
+<section class="hero wrap" id="top" aria-labelledby="title">
+  <div class="hero-text">
+    <p class="kicker">
+      <span data-l="en">University of Patras · Department of Computer Engineering &amp; Informatics</span>
+      <span data-l="el">Πανεπιστήμιο Πατρών · Τμήμα Μηχανικών Η/Υ και Πληροφορικής</span>
+    </p>
+    <h1 id="title">
+      <span data-l="en">Where does the network look? Brain tumour MRI classification with nine deep learning architectures and explainable AI</span>
+      <span data-l="el">Πού κοιτάζει το δίκτυο; Ταξινόμηση όγκων εγκεφάλου σε MRI με εννέα αρχιτεκτονικές βαθιάς μάθησης και επεξηγήσιμη τεχνητή νοημοσύνη</span>
+    </h1>
+    <p class="subtitle">
+      <span data-l="en">Systematic comparison with a novel hybrid CNN–Transformer, explainable AI and statistical significance testing · Diploma thesis</span>
+      <span data-l="el">Συστηματική σύγκριση με ένα νέο υβριδικό CNN–Transformer, επεξηγήσιμη ΤΝ και έλεγχο στατιστικής σημαντικότητας · Διπλωματική εργασία</span>
+    </p>
+    <dl class="meta">
+      <div><dt><span data-l="en">Author</span><span data-l="el">Συγγραφέας</span></dt>
+        <dd><span data-l="en">Ioannis Balasis</span><span data-l="el">Ιωάννης Μπαλάσης</span></dd></div>
+      <div><dt><span data-l="en">Supervisor</span><span data-l="el">Επιβλέπων</span></dt>
+        <dd><span data-l="en">Christos Makris, Associate Professor</span><span data-l="el">Χρήστος Μακρής, Αναπληρωτής Καθηγητής</span></dd></div>
+      <div><dt><span data-l="en">Year</span><span data-l="el">Έτος</span></dt>
+        <dd><span data-l="en">Patras, 2026</span><span data-l="el">Πάτρα, 2026</span></dd></div>
+    </dl>
+    <div class="cta">
+      <a class="btn btn-primary" href="#xai"><span data-l="en">Try the XAI explorer</span><span data-l="el">Δοκίμασε τον XAI explorer</span> <span aria-hidden="true">↓</span></a>
+      <a class="btn" href="#demo"><span aria-hidden="true">▶</span> <span data-l="en">Try the model</span><span data-l="el">Δοκίμασε το μοντέλο</span></a>
+      <a class="btn" href="https://github.com/YannisBalasis/Brain-Cancer-Detection" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+        <span data-l="en">Source code</span><span data-l="el">Κώδικας</span>
+      </a>
+    </div>
+  </div>
+  <figure class="hero-fig">
+    <div class="mri-grid" id="hero-mri"></div>
+    <figcaption>
+      <span data-l="en">One MRI slice per class from the Kaggle dataset: three tumour types and healthy tissue. The task is to tell them apart, and to show why.</span>
+      <span data-l="el">Μία τομή MRI ανά κλάση από το σύνολο δεδομένων Kaggle: τρεις τύποι όγκου και υγιής ιστός. Ζητούμενο είναι να ξεχωρίσουν, και να φανεί γιατί.</span>
+    </figcaption>
+  </figure>
+</section>
+
+<section class="wrap" aria-label="Key numbers">
+  <ul class="stats" id="stats-strip">
+    <li><b>7,023</b><span data-l="en">MRI images, 4 classes</span><span data-l="el">εικόνες MRI, 4 κλάσεις</span></li>
+    <li><b>9</b><span data-l="en">deep learning architectures</span><span data-l="el">αρχιτεκτονικές βαθιάς μάθησης</span></li>
+    <li><b>4</b><span data-l="en">explainable-AI methods</span><span data-l="el">μέθοδοι επεξηγήσιμης ΤΝ</span></li>
+    <li><b>98.15<small>%</small></b><span data-l="en">accuracy, MedViT V2 Dual</span><span data-l="el">ακρίβεια, MedViT V2 Dual</span></li>
+    <li><b>χ²<sub>F</sub> = 164.45</b><span data-l="en">Friedman test, p &lt; 0.001</span><span data-l="el">έλεγχος Friedman, p &lt; 0,001</span></li>
+  </ul>
+</section>
+
+<!-- ═════════════ 01 QUESTION ═════════════ -->
+<section id="question" class="wrap sec" aria-labelledby="h-question">
+  <p class="num" aria-hidden="true">01</p>
+  <h2 id="h-question"><span data-l="en">The question</span><span data-l="el">Το ερώτημα</span></h2>
+  <div class="read prose">
+    <p data-l="en">A brain MRI slice either shows a tumour or it does not, and if it does, the tumour is a glioma, a meningioma or a pituitary adenoma. Convolutional networks now separate these classes with accuracy close to 98% on public datasets. That number alone answers almost nothing a clinician would ask.</p>
+    <p data-l="el">Μια τομή MRI εγκεφάλου είτε δείχνει όγκο είτε όχι, και αν δείχνει, ο όγκος είναι γλοίωμα, μηνιγγίωμα ή αδένωμα υπόφυσης. Τα συνελικτικά δίκτυα ξεχωρίζουν σήμερα αυτές τις κλάσεις με ακρίβεια κοντά στο 98% σε δημόσια σύνολα δεδομένων. Μόνο του όμως αυτό το νούμερο δεν απαντά σχεδόν σε τίποτα από όσα θα ρωτούσε ένας γιατρός.</p>
+    <p data-l="en">This thesis asks three harder questions. <strong>Which architecture</strong> should one use, when a 1.3&nbsp;M-parameter CNN and a 50&nbsp;M-parameter transformer land within a fraction of a point? <strong>Is the difference real</strong>, or noise on a 503-image test subset? And <strong>where does each network look</strong> when it decides? To answer them, nine architectures were trained on the same data, compared with non-parametric statistics, and opened up with four explainable-AI methods.</p>
+    <p data-l="el">Η εργασία θέτει τρία δυσκολότερα ερωτήματα. <strong>Ποια αρχιτεκτονική</strong> να επιλέξει κανείς, όταν ένα CNN 1,3&nbsp;M παραμέτρων και ένας transformer 50&nbsp;M παραμέτρων απέχουν κλάσματα της μονάδας; <strong>Είναι η διαφορά πραγματική</strong> ή θόρυβος πάνω σε ένα υποσύνολο 503 εικόνων; Και <strong>πού κοιτάζει κάθε δίκτυο</strong> τη στιγμή που αποφασίζει; Για να απαντηθούν, εννέα αρχιτεκτονικές εκπαιδεύτηκαν στα ίδια δεδομένα, συγκρίθηκαν με μη παραμετρική στατιστική και «άνοιξαν» με τέσσερις μεθόδους επεξηγήσιμης ΤΝ.</p>
+    <p data-l="en">The most interesting answer came from the third question. Every model finds the meningioma in the right place, yet meningioma is the class every model gets wrong most often. The thesis calls this the <a href="#paradox">Meningioma Paradox</a>.</p>
+    <p data-l="el">Η πιο ενδιαφέρουσα απάντηση ήρθε από το τρίτο ερώτημα. Όλα τα μοντέλα εντοπίζουν το μηνιγγίωμα στη σωστή θέση, κι όμως είναι η κλάση στην οποία όλα κάνουν τα περισσότερα λάθη. Η εργασία το ονομάζει <a href="#paradox">Παράδοξο του Μηνιγγιώματος</a>.</p>
+  </div>
+</section>
+
+<!-- ═════════════ 02 PIPELINE ═════════════ -->
+<section id="pipeline" class="wrap sec" aria-labelledby="h-pipeline">
+  <p class="num" aria-hidden="true">02</p>
+  <h2 id="h-pipeline"><span data-l="en">The pipeline</span><span data-l="el">Η ροή της εργασίας</span></h2>
+  <p class="lede read">
+    <span data-l="en">Eight stages take an MRI file to a finding. Select any stage to see what happens there. Violet stages are data and training, teal stages are evaluation.</span>
+    <span data-l="el">Οκτώ στάδια οδηγούν από ένα αρχείο MRI σε ένα εύρημα. Επίλεξε οποιοδήποτε στάδιο για να δεις τι γίνεται εκεί. Τα μωβ στάδια είναι δεδομένα και εκπαίδευση, τα πρασινογάλαζα αξιολόγηση.</span>
+  </p>
+  <div class="flow-card card">
+    <div class="flow-svg" id="pipeline-flow"></div>
+    <div class="flow-detail" id="pipeline-detail" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ═════════════ 03 MODELS ═════════════ -->
+<section id="models" class="wrap sec" aria-labelledby="h-models">
+  <p class="num" aria-hidden="true">03</p>
+  <h2 id="h-models"><span data-l="en">Nine architectures</span><span data-l="el">Εννέα αρχιτεκτονικές</span></h2>
+  <p class="lede read">
+    <span data-l="en">From a 1.28 M-parameter custom CNN to a 49.94 M-parameter hybrid transformer. Pick a model to draw its data flow; select any block for its details.</span>
+    <span data-l="el">Από ένα custom CNN 1,28 M παραμέτρων μέχρι έναν υβριδικό transformer 49,94 M. Διάλεξε μοντέλο για να σχεδιαστεί η ροή δεδομένων του· επίλεξε οποιοδήποτε μπλοκ για λεπτομέρειες.</span>
+  </p>
+  <div class="card arch-card">
+    <div class="tabs" role="tablist" id="arch-tabs" aria-label="Architectures"></div>
+    <div class="arch-body" role="tabpanel" id="arch-panel" tabindex="0">
+      <div class="arch-head" id="arch-head"></div>
+      <div class="flow-svg" id="arch-flow"></div>
+      <div class="flow-detail" id="arch-detail" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="legend-row" aria-hidden="true">
+    <span class="lg lg-in">Input</span><span class="lg lg-conv">Conv / CNN</span><span class="lg lg-attn">Attention</span><span class="lg lg-dense">Dense</span><span class="lg lg-fuse">Fusion</span><span class="lg lg-out">Output</span>
+  </div>
+</section>
+
+<!-- ═════════════ 04 RESULTS ═════════════ -->
+<section id="results" class="wrap sec" aria-labelledby="h-results">
+  <p class="num" aria-hidden="true">04</p>
+  <h2 id="h-results"><span data-l="en">Results</span><span data-l="el">Αποτελέσματα</span></h2>
+  <div class="read prose">
+    <p data-l="en">Two evaluation protocols are used. <strong>Cross-model comparison</strong> uses a common 503-image tumour-positive subset (glioma 162, meningioma 165, pituitary 176), because the 3-Class CNN and the 1-vs-1 Ensemble cannot predict "no tumour". The <strong>full four-class evaluation</strong> on all 703 test images is reported for the three models that predict all four classes.</p>
+    <p data-l="el">Χρησιμοποιούνται δύο πρωτόκολλα αξιολόγησης. Η <strong>διασταυρούμενη σύγκριση</strong> γίνεται σε κοινό υποσύνολο 503 εικόνων με όγκο (γλοίωμα 162, μηνιγγίωμα 165, υπόφυση 176), επειδή το 3-Class CNN και το 1-vs-1 Ensemble δεν μπορούν να προβλέψουν «χωρίς όγκο». Η <strong>πλήρης αξιολόγηση τεσσάρων κλάσεων</strong> στις 703 εικόνες ελέγχου αφορά τα τρία μοντέλα που προβλέπουν και τις τέσσερις κλάσεις.</p>
+  </div>
+
+  <figure class="card chart-card" aria-labelledby="perf-title">
+    <div class="chart-top">
+      <h3 id="perf-title"><span data-l="en">Performance on the 503-image subset</span><span data-l="el">Απόδοση στο υποσύνολο 503 εικόνων</span></h3>
+      <div class="seg" role="radiogroup" id="perf-metric" aria-label="Metric"></div>
+    </div>
+    <div id="perf-chart" class="chart"></div>
+    <figcaption class="cap" id="perf-cap"></figcaption>
+    <details class="table-view"><summary><span data-l="en">Show as table</span><span data-l="el">Προβολή ως πίνακας</span></summary><div id="perf-table"></div></details>
+  </figure>
+
+  <div class="grid-2">
+    <figure class="card chart-card" aria-labelledby="scatter-title">
+      <h3 id="scatter-title"><span data-l="en">Accuracy against model size</span><span data-l="el">Ακρίβεια έναντι μεγέθους μοντέλου</span></h3>
+      <div id="scatter-chart" class="chart"></div>
+      <figcaption class="cap">
+        <span data-l="en">Parameters on a log scale. MedViT V2 Dual matches the top CNNs at about 39× their size; MedViT V2 Base alone falls five points behind.</span>
+        <span data-l="el">Παράμετροι σε λογαριθμική κλίμακα. Το MedViT V2 Dual φτάνει τα καλύτερα CNN με περίπου 39 φορές το μέγεθός τους· το MedViT V2 Base μόνο του μένει πέντε μονάδες πίσω.</span>
+      </figcaption>
+    </figure>
+    <figure class="card chart-card" aria-labelledby="cm-title">
+      <h3 id="cm-title"><span data-l="en">MedViT V2 Dual, full 703-image test set</span><span data-l="el">MedViT V2 Dual, πλήρες σύνολο ελέγχου 703 εικόνων</span></h3>
+      <div id="cm-chart" class="chart"></div>
+      <figcaption class="cap">
+        <span data-l="en">Rows are the true class, columns the prediction. 690 of 703 correct (98.15%). Eight of the thirteen errors are meningiomas.</span>
+        <span data-l="el">Οι γραμμές είναι η πραγματική κλάση, οι στήλες η πρόβλεψη. 690 σωστές από 703 (98,15%). Οκτώ από τα δεκατρία λάθη είναι μηνιγγιώματα.</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ═════════════ 05 STATISTICS ═════════════ -->
+<section id="stats" class="wrap sec" aria-labelledby="h-stats">
+  <p class="num" aria-hidden="true">05</p>
+  <h2 id="h-stats"><span data-l="en">Is the difference real?</span><span data-l="el">Είναι η διαφορά πραγματική;</span></h2>
+  <p class="lede read">
+    <span data-l="en">Accuracy differences of half a point can be luck. Each test image is scored per model, and four non-parametric tests ask whether the ranking would survive a different sample. Step through them in order.</span>
+    <span data-l="el">Διαφορές μισής μονάδας στην ακρίβεια μπορεί να είναι τύχη. Κάθε εικόνα ελέγχου βαθμολογείται ανά μοντέλο, και τέσσερις μη παραμετρικοί έλεγχοι ρωτούν αν η κατάταξη θα άντεχε σε ένα διαφορετικό δείγμα. Πέρασέ τους με τη σειρά.</span>
+  </p>
+  <div class="card">
+    <ol class="stepper" id="stat-steps" role="tablist" aria-label="Statistical tests"></ol>
+    <div class="step-body" id="stat-body" role="tabpanel" tabindex="0" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ═════════════ 06 XAI ═════════════ -->
+<section id="xai" class="wrap sec" aria-labelledby="h-xai">
+  <p class="num" aria-hidden="true">06</p>
+  <h2 id="h-xai"><span data-l="en">Where does the network look?</span><span data-l="el">Πού κοιτάζει το δίκτυο;</span></h2>
+  <p class="lede read">
+    <span data-l="en">Four explainable-AI methods, applied to one median-confidence, correctly classified sample per class. Median, not best, so the maps show typical behaviour. Pick a class and a method, then compare the models side by side.</span>
+    <span data-l="el">Τέσσερις μέθοδοι επεξηγήσιμης ΤΝ, σε ένα σωστά ταξινομημένο δείγμα διάμεσης βεβαιότητας ανά κλάση. Διάμεσης και όχι καλύτερης, ώστε οι χάρτες να δείχνουν τυπική συμπεριφορά. Διάλεξε κλάση και μέθοδο και σύγκρινε τα μοντέλα δίπλα-δίπλα.</span>
+  </p>
+  <div class="card xai-card">
+    <div class="xai-controls">
+      <div>
+        <p class="ctl-label" id="xai-class-l"><span data-l="en">Class</span><span data-l="el">Κλάση</span></p>
+        <div class="seg" role="radiogroup" aria-labelledby="xai-class-l" id="xai-class"></div>
+      </div>
+      <div>
+        <p class="ctl-label" id="xai-method-l"><span data-l="en">Method</span><span data-l="el">Μέθοδος</span></p>
+        <div class="seg" role="radiogroup" aria-labelledby="xai-method-l" id="xai-method"></div>
+      </div>
+    </div>
+    <div class="xai-method-info" id="xai-info" aria-live="polite"></div>
+    <div class="xai-grid" id="xai-grid"></div>
+    <div class="xai-focus" id="xai-focus" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ═════════════ 07 PARADOX ═════════════ -->
+<section id="paradox" class="wrap sec" aria-labelledby="h-paradox">
+  <p class="num" aria-hidden="true">07</p>
+  <h2 id="h-paradox"><span data-l="en">The Meningioma Paradox</span><span data-l="el">Το Παράδοξο του Μηνιγγιώματος</span></h2>
+  <div class="grid-2 align-start">
+    <div class="prose">
+      <p data-l="en">If a model misclassifies a tumour, the natural guess is that it never found the tumour. The XAI evidence says otherwise. All four methods agree that every model localises the meningioma in its expected extra-axial position, at the edge of the brain against the skull.</p>
+      <p data-l="el">Όταν ένα μοντέλο ταξινομεί λάθος έναν όγκο, η φυσική υπόθεση είναι ότι δεν τον βρήκε ποτέ. Τα δεδομένα XAI λένε το αντίθετο. Και οι τέσσερις μέθοδοι συμφωνούν ότι κάθε μοντέλο εντοπίζει το μηνιγγίωμα στην αναμενόμενη εξωαξονική θέση, στο όριο του εγκεφάλου με το κρανίο.</p>
+      <p data-l="en">Yet meningioma has the lowest F1-score in every four-class model. And masking the region the model attends to costs far more confidence for meningioma (46–67%) than for glioma or pituitary (1–17%), with non-overlapping bootstrap intervals in all five models tested.</p>
+      <p data-l="el">Κι όμως το μηνιγγίωμα έχει το χαμηλότερο F1 σε κάθε μοντέλο τεσσάρων κλάσεων. Και η κάλυψη της περιοχής που κοιτάζει το μοντέλο κοστίζει πολύ περισσότερη βεβαιότητα στο μηνιγγίωμα (46–67%) απ' ό,τι στο γλοίωμα ή στην υπόφυση (1–17%), με διαστήματα bootstrap που δεν επικαλύπτονται σε κανένα από τα πέντε μοντέλα.</p>
+      <p data-l="en"><strong>The reading:</strong> it is not a detection failure but a <em>classification boundary</em> problem. Meningiomas vary in shape and location, and their features overlap with other tumour types in the final layers, even though the earlier layers have already found them. A model can know <em>where</em> the pathology is and still hesitate about <em>what</em> it is. Accuracy alone would never have shown this.</p>
+      <p data-l="el"><strong>Η ερμηνεία:</strong> δεν πρόκειται για αποτυχία ανίχνευσης αλλά για πρόβλημα <em>ορίου απόφασης</em>. Τα μηνιγγιώματα ποικίλλουν σε σχήμα και θέση, και τα χαρακτηριστικά τους επικαλύπτονται με άλλους τύπους όγκου στα τελικά επίπεδα, παρότι τα προηγούμενα επίπεδα τα έχουν ήδη εντοπίσει. Ένα μοντέλο μπορεί να ξέρει <em>πού</em> βρίσκεται η παθολογία και να διστάζει για το <em>τι</em> είναι. Η ακρίβεια μόνη της δεν θα το είχε δείξει ποτέ.</p>
+    </div>
+    <figure class="card chart-card" aria-labelledby="f1-title">
+      <h3 id="f1-title"><span data-l="en">Per-class F1-score, 703-image test set</span><span data-l="el">F1 ανά κλάση, σύνολο ελέγχου 703 εικόνων</span></h3>
+      <div id="f1-chart" class="chart"></div>
+      <figcaption class="cap"><span data-l="en">Meningioma (larger dot, labelled) is the lowest F1 in every model.</span><span data-l="el">Το μηνιγγίωμα (μεγαλύτερη κουκκίδα, με ετικέτα) έχει το χαμηλότερο F1 σε κάθε μοντέλο.</span></figcaption>
+      <details class="table-view"><summary><span data-l="en">Show as table</span><span data-l="el">Προβολή ως πίνακας</span></summary><div id="f1-table"></div></details>
+    </figure>
+  </div>
+  <figure class="card chart-card" aria-labelledby="ci-title">
+    <h3 id="ci-title"><span data-l="en">Confidence drop when the salient region is masked</span><span data-l="el">Πτώση βεβαιότητας όταν καλυφθεί η κρίσιμη περιοχή</span></h3>
+    <div id="ci-chart" class="chart"></div>
+    <figcaption class="cap"><span data-l="en">Mean drop with 95% bootstrap confidence interval (B = 10,000). Each dot is one class for one model; meningioma sits apart in every row.</span><span data-l="el">Μέση πτώση με διάστημα εμπιστοσύνης 95% bootstrap (B = 10.000). Κάθε κουκκίδα είναι μία κλάση για ένα μοντέλο· το μηνιγγίωμα ξεχωρίζει σε κάθε γραμμή.</span></figcaption>
+    <details class="table-view"><summary><span data-l="en">Show as table</span><span data-l="el">Προβολή ως πίνακας</span></summary><div id="ci-table"></div></details>
+  </figure>
+</section>
+
+<!-- ═════════════ 08 ABLATION ═════════════ -->
+<section id="ablation" class="wrap sec" aria-labelledby="h-ablation">
+  <p class="num" aria-hidden="true">08</p>
+  <h2 id="h-ablation"><span data-l="en">Why the hybrid works</span><span data-l="el">Γιατί δουλεύει το υβριδικό</span></h2>
+  <p class="lede read">
+    <span data-l="en">Switch the branches on and off. Neither a transformer alone nor two CNNs fused together reach the single CNN. Only the CNN and the transformer together do: the gain is synergistic, not an average.</span>
+    <span data-l="el">Άναψε και σβήσε τους κλάδους. Ούτε ο transformer μόνος του ούτε δύο CNN μαζί φτάνουν το απλό CNN. Μόνο το CNN μαζί με τον transformer τα καταφέρνουν: το κέρδος είναι συνεργιστικό, όχι μέσος όρος.</span>
+  </p>
+  <div class="card ablation" id="ablation-card"></div>
+</section>
+
+<!-- ═════════════ 09 CLINICAL APP ═════════════ -->
+<section id="app" class="wrap sec" aria-labelledby="h-app">
+  <p class="num" aria-hidden="true">09</p>
+  <h2 id="h-app"><span data-l="en">From research to a clinical prototype</span><span data-l="el">Από την έρευνα σε κλινικό πρωτότυπο</span></h2>
+  <p class="lede read">
+    <span data-l="en">The thesis ends with a working clinical decision support system built in Streamlit. A radiologist uploads one MRI slice; seven trained models classify it, vote on a consensus diagnosis, explain themselves with all four XAI methods, and the result is exported as a PDF report. Select a stage to see what it does.</span>
+    <span data-l="el">Η εργασία κλείνει με ένα λειτουργικό σύστημα υποστήριξης κλινικών αποφάσεων σε Streamlit. Ο ακτινολόγος ανεβάζει μία τομή MRI· επτά εκπαιδευμένα μοντέλα την ταξινομούν, ψηφίζουν μια κοινή διάγνωση, εξηγούν την απόφασή τους και με τις τέσσερις μεθόδους XAI, και το αποτέλεσμα εξάγεται ως αναφορά PDF. Επίλεξε ένα στάδιο για να δεις τι κάνει.</span>
+  </p>
+  <div class="flow-card card">
+    <div class="flow-svg" id="app-flow"></div>
+    <div class="flow-detail" id="app-detail" aria-live="polite"></div>
+  </div>
+  <div class="card demo" id="demo" aria-labelledby="h-demo">
+    <div class="demo-head">
+      <div>
+        <h3 id="h-demo"><span data-l="en">Try the model in your browser</span><span data-l="el">Δοκίμασε το μοντέλο στον browser σου</span></h3>
+        <p data-l="en">The thesis 4-Class CNN (1.28 M parameters, 98.01%) runs here with TensorFlow.js, with Grad-CAM from its last convolutional layer. Your image never leaves your device.</p>
+        <p data-l="el">Το 4-Class CNN της εργασίας (1,28 M παράμετροι, 98,01%) τρέχει εδώ με TensorFlow.js, μαζί με Grad-CAM από το τελευταίο συνελικτικό επίπεδο. Η εικόνα σου δεν φεύγει ποτέ από τη συσκευή σου.</p>
+      </div>
+      <div class="demo-start">
+        <button type="button" class="btn btn-primary" id="demo-start"><span aria-hidden="true">▶</span> <span data-l="en">Start demo · 5 MB</span><span data-l="el">Έναρξη demo · 5 MB</span></button>
+        <span class="demo-status" id="demo-status" role="status"></span>
+      </div>
+    </div>
+    <div class="demo-body" id="demo-body" hidden>
+      <div class="demo-inputs">
+        <p class="ctl-label"><span data-l="en">Pick a test-set MRI</span><span data-l="el">Διάλεξε MRI από το σύνολο ελέγχου</span></p>
+        <div class="demo-samples" id="demo-samples"></div>
+        <label class="btn demo-upload">
+          <input type="file" accept="image/*" id="demo-file" class="sr-only">
+          <span aria-hidden="true">⤒</span> <span data-l="en">Upload your own MRI</span><span data-l="el">Ανέβασε δική σου MRI</span>
+        </label>
+        <p class="cap"><span data-l="en">or drag an image onto this card</span><span data-l="el">ή σύρε μια εικόνα πάνω σε αυτή την κάρτα</span></p>
+      </div>
+      <figure class="demo-fig"><canvas id="demo-img" width="224" height="224" role="img" aria-label="Input MRI"></canvas><figcaption><span data-l="en">Input, 224 × 224</span><span data-l="el">Είσοδος, 224 × 224</span></figcaption></figure>
+      <figure class="demo-fig"><canvas id="demo-cam" width="224" height="224" role="img" aria-label="Grad-CAM heatmap"></canvas><figcaption>Grad-CAM · conv4_2</figcaption></figure>
+      <div class="demo-result" id="demo-result" aria-live="polite"></div>
+    </div>
+    <p class="cap demo-note"><span data-l="en">The full Streamlit app combines seven models, a consensus vote, all four XAI methods and a PDF report; it runs locally (below). Research prototype, not for diagnosis.</span><span data-l="el">Το πλήρες app σε Streamlit συνδυάζει επτά μοντέλα, κοινή ψηφοφορία, και τις τέσσερις μεθόδους XAI και αναφορά PDF· τρέχει τοπικά (παρακάτω). Ερευνητικό πρωτότυπο, όχι για διάγνωση.</span></p>
+  </div>
+  <div class="grid-2 align-start">
+    <div class="card run-card">
+      <h3><span data-l="en">Run it locally</span><span data-l="el">Τρέξ' το τοπικά</span></h3>
+<pre tabindex="0"><code>git clone https://github.com/YannisBalasis/Brain-Cancer-Detection.git
+cd Brain-Cancer-Detection
+pip install streamlit tensorflow numpy pillow matplotlib reportlab
+streamlit run brain_tumor_streamlit.py</code></pre>
+      <p class="cap"><span data-l="en">The trained weights (.h5) are not part of this web page; the app loads them from the model directory set in its sidebar.</span><span data-l="el">Τα εκπαιδευμένα βάρη (.h5) δεν περιλαμβάνονται σε αυτή τη σελίδα· το app τα φορτώνει από τον φάκελο μοντέλων που ορίζεται στην πλευρική στήλη.</span></p>
+    </div>
+    <div class="card run-card warn">
+      <h3><span data-l="en">Research prototype</span><span data-l="el">Ερευνητικό πρωτότυπο</span></h3>
+      <p data-l="en">The system is a demonstration of how classification, consensus and explanation can be presented together to a clinician. It has not been clinically validated and must not be used for diagnosis.</p>
+      <p data-l="el">Το σύστημα δείχνει πώς η ταξινόμηση, η κοινή απόφαση και η εξήγηση μπορούν να παρουσιαστούν μαζί σε έναν γιατρό. Δεν έχει επικυρωθεί κλινικά και δεν πρέπει να χρησιμοποιείται για διάγνωση.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ 10 CONCLUSIONS ═════════════ -->
+<section id="conclusions" class="wrap sec" aria-labelledby="h-concl">
+  <p class="num" aria-hidden="true">10</p>
+  <h2 id="h-concl"><span data-l="en">What the thesis shows</span><span data-l="el">Τι δείχνει η εργασία</span></h2>
+  <div class="findings">
+    <article class="finding">
+      <h3><span data-l="en">Small custom CNNs are hard to beat</span><span data-l="el">Τα μικρά custom CNN δύσκολα ξεπερνιούνται</span></h3>
+      <p data-l="en">The 4-Class and 3-Class CNNs (1.28 M parameters) reach 98.01% and 97.80%. Transfer learning from ImageNet does worst: 86.03% for EfficientNet-B3 Dual and 76.85% for ResNet-50 Dual, a persistent domain gap between natural images and MRI.</p>
+      <p data-l="el">Τα 4-Class και 3-Class CNN (1,28 M παράμετροι) φτάνουν 98,01% και 97,80%. Η μεταφορά μάθησης από το ImageNet αποδίδει χειρότερα: 86,03% για το EfficientNet-B3 Dual και 76,85% για το ResNet-50 Dual, ένα επίμονο χάσμα πεδίου ανάμεσα σε φυσικές εικόνες και MRI.</p>
+    </article>
+    <article class="finding">
+      <h3><span data-l="en">The hybrid earns its place statistically</span><span data-l="el">Το υβριδικό κερδίζει τη θέση του στατιστικά</span></h3>
+      <p data-l="en">MedViT V2 Dual (98.15%) is statistically indistinguishable from the best model and significantly better than the 4-Class CNN, the Ensemble, the Multi-Dual System and its own single-branch version after Bonferroni correction.</p>
+      <p data-l="el">Το MedViT V2 Dual (98,15%) δεν διαφέρει στατιστικά από το καλύτερο μοντέλο και είναι σημαντικά καλύτερο από το 4-Class CNN, το Ensemble, το Multi-Dual System και την απλή εκδοχή του εαυτού του, μετά τη διόρθωση Bonferroni.</p>
+    </article>
+    <article class="finding">
+      <h3><span data-l="en">Top models are practically equivalent</span><span data-l="el">Τα κορυφαία μοντέλα είναι πρακτικά ισοδύναμα</span></h3>
+      <p data-l="en">All effect sizes inside the top group are negligible (Cohen's d &lt; 0.2). Nominal accuracy rankings should not be read as real superiority without a significance test.</p>
+      <p data-l="el">Όλα τα μεγέθη επίδρασης μέσα στην κορυφαία ομάδα είναι αμελητέα (Cohen's d &lt; 0,2). Οι ονομαστικές κατατάξεις ακρίβειας δεν πρέπει να διαβάζονται ως πραγματική υπεροχή χωρίς έλεγχο σημαντικότητας.</p>
+    </article>
+    <article class="finding">
+      <h3><span data-l="en">Transformers resist gradient-based explanation</span><span data-l="el">Οι transformers αντιστέκονται στις εξηγήσεις κλίσεων</span></h3>
+      <p data-l="en">At high confidence, MedViT V2 produces near-zero SHAP and Integrated Gradients attributions (gradient saturation), and its Grad-CAM spreads over the whole brain. Occlusion, which needs no gradients, remains informative.</p>
+      <p data-l="el">Σε υψηλή βεβαιότητα, το MedViT V2 δίνει σχεδόν μηδενικές αποδόσεις SHAP και Integrated Gradients (κορεσμός κλίσεων), και το Grad-CAM του απλώνεται σε όλο τον εγκέφαλο. Η μέθοδος occlusion, που δεν χρειάζεται κλίσεις, παραμένει κατατοπιστική.</p>
+    </article>
+    <article class="finding">
+      <h3><span data-l="en">XAI found what accuracy hid</span><span data-l="el">Η XAI βρήκε ό,τι έκρυβε η ακρίβεια</span></h3>
+      <p data-l="en">The Meningioma Paradox: correct localisation, weakest classification. It points to the decision boundary, not the detector, as the place to improve.</p>
+      <p data-l="el">Το Παράδοξο του Μηνιγγιώματος: σωστός εντοπισμός, ασθενέστερη ταξινόμηση. Δείχνει ότι το σημείο για βελτίωση είναι το όριο απόφασης, όχι ο ανιχνευτής.</p>
+    </article>
+    <article class="finding finding-limit">
+      <h3><span data-l="en">Limitations</span><span data-l="el">Περιορισμοί</span></h3>
+      <p data-l="en">A single public dataset of 2D slices, with no external clinical validation. XAI maps are shown for representative samples, quantified with bootstrap only for occlusion. The models are research prototypes and are <strong>not intended for clinical diagnosis</strong>.</p>
+      <p data-l="el">Ένα μόνο δημόσιο σύνολο δεδομένων με δισδιάστατες τομές, χωρίς εξωτερική κλινική επικύρωση. Οι χάρτες XAI αφορούν αντιπροσωπευτικά δείγματα και ποσοτικοποιούνται με bootstrap μόνο για το occlusion. Τα μοντέλα είναι ερευνητικά πρωτότυπα και <strong>δεν προορίζονται για κλινική διάγνωση</strong>.</p>
+    </article>
+  </div>
+</section>
+
+<section class="wrap sec cite" aria-labelledby="h-cite">
+  <h2 id="h-cite"><span data-l="en">Cite</span><span data-l="el">Αναφορά</span></h2>
+  <div class="card cite-card">
+<pre id="bibtex" tabindex="0">@mastersthesis{balasis2026brain,
+  author = {Balasis, Ioannis},
+  title  = {Deep Learning Architectures for Brain Tumor MRI Classification:
+            Systematic Comparison with a Novel Hybrid CNN-Transformer,
+            Explainable AI and Statistical Significance Testing},
+  school = {University of Patras, Department of Computer Engineering and Informatics},
+  type   = {Diploma thesis},
+  year   = {2026}
+}</pre>
+    <button type="button" class="btn" id="btn-copy"><span data-l="en">Copy BibTeX</span><span data-l="el">Αντιγραφή BibTeX</span></button>
+    <span class="copy-status" id="copy-status" role="status"></span>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap footer">
+  <p>
+    <span data-l="en">Ioannis Balasis · University of Patras, CEID · 2026. Supervisor: Christos Makris.</span>
+    <span data-l="el">Ιωάννης Μπαλάσης · Πανεπιστήμιο Πατρών, ΤΜΗΥΠ · 2026. Επιβλέπων: Χρήστος Μακρής.</span>
+  </p>
+  <p class="muted">
+    <span data-l="en">MRI images: Brain Tumor MRI Dataset (Kaggle). For academic and educational use only. Not a medical device.</span>
+    <span data-l="el">Εικόνες MRI: Brain Tumor MRI Dataset (Kaggle). Μόνο για ακαδημαϊκή και εκπαιδευτική χρήση. Δεν αποτελεί ιατρική συσκευή.</span>
+  </p>
+</footer>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/brain.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/demo.js"></script>
+</body>
+</html>
